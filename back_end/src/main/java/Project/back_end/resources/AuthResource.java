@@ -1,33 +1,35 @@
 package Project.back_end.resources;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import Project.back_end.config.JwtUtil;
-import Project.back_end.dto.LoginRequestDTO;
-import Project.back_end.dto.LoginResponseDTO;
+import Project.back_end.dto.AuthDTO;
 import Project.back_end.entities.User;
-import Project.back_end.services.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthResource {
 
-    private final AuthService authService;
-    private final JwtUtil jwtUtil;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-    public AuthResource(AuthService authService, JwtUtil jwtUtil) {
-        this.authService = authService;
-        this.jwtUtil = jwtUtil;
-    }
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO dto) {
+    public ResponseEntity<AuthDTO.LoginResponse> login(@RequestBody AuthDTO.LoginRequest request) {
 
-        User user = authService.authenticate(dto);
+        Authentication auth = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.email(), request.password())
+        );
 
-        String token = jwtUtil.generateToken(user.getEmail());
+        User user = (User) auth.getPrincipal();
+        String token = jwtUtil.generateToken(user.getUsername());
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.ok(new AuthDTO.LoginResponse(token, user.getEmail(), user.getName()));
     }
 }

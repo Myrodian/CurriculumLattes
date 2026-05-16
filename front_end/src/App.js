@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import { useEffect, useState } from "react";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/api/users")
-      .then(res => res.json())
-      .then(data => setUsers(data));
-  }, []);
-
   return (
-    <div>
-      <h1>Usuários</h1>
-      <ul>
-        {users.map((u, i) => (
-          <li key={i}>{u}</li>
-        ))}
-      </ul>
-    </div>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/dashboard"
+        element={
+          <PrivateRoute>
+            <h1>Dashboard (protegido)</h1>
+          </PrivateRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to="/login" />} />
+    </Routes>
   );
 }
 

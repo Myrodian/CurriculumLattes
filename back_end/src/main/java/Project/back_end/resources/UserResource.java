@@ -1,26 +1,62 @@
 package Project.back_end.resources;
 
+import Project.back_end.dto.UserDTO;
+import Project.back_end.dto.UserInsertDTO;
+import Project.back_end.services.UserService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import Project.back_end.entities.User;
-import Project.back_end.services.UserService;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/users")
 public class UserResource {
 
-    private final UserService service;
+    @Autowired
+    private UserService userService;
 
-    public UserResource(UserService service) {
-        this.service = service;
+    @GetMapping
+    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
+        Page<UserDTO> users =  userService.findAll(pageable);
+
+        return ResponseEntity.ok().body(users);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
+
+        UserDTO dto = userService.findById(id);
+
+        return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestParam String email,
-                                       @RequestParam String password) {
+    public ResponseEntity<UserDTO> insert(@RequestBody @Valid UserInsertDTO dto) {
+        UserDTO returnDTO =  userService.insert(dto);
 
-        User user = service.createUser(email, password);
-        return ResponseEntity.ok(user);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(returnDTO.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(returnDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody @Valid UserDTO dto) {
+        UserDTO returnDTO =  userService.update(id, dto);
+        return ResponseEntity.ok().body(returnDTO);
     }
 }

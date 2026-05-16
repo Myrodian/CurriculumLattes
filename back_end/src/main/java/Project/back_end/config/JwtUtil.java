@@ -1,23 +1,46 @@
 package Project.back_end.config;
 
-import java.util.Date;
-
-import org.springframework.stereotype.Component;
-
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "secret-key";
+    @Value("${jwt.secret}")
+    private String secret;
 
-    public String generateToken(String email) {
+    @Value("${jwt.expiration}")
+    private Long expiration;
+
+    public String generateToken(String username) {
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1h
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .compact();
+    }
+
+    public String extractUsername(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(secret.getBytes())
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.getSubject();
+    }
+
+    public boolean isTokenValid(String token) {
+        try {
+            extractUsername(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
     }
 }

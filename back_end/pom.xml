@@ -8,10 +8,10 @@
 		<version>3.5.11</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.ifmg</groupId>
-	<artifactId>produto1-2026</artifactId>
+	<groupId>Project</groupId>
+	<artifactId>back_end</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>produto1-2026</name>
+	<name>back_end</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -82,7 +82,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
