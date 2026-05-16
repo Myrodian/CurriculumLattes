@@ -32,4 +32,8 @@ public class AuthResource {
 
         return ResponseEntity.ok(new AuthDTO.LoginResponse(token, user.getEmail(), user.getName()));
     }
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("ok");
+    }
 }

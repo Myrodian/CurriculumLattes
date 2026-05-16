@@ -131,6 +131,21 @@ body {
   gap: 6px;
 }
 
+.login-badge.online {
+  background: #d4eddf;
+  color: #1e7a4e;
+}
+
+.login-badge.offline {
+  background: #fdf0ef;
+  color: #922b21;
+}
+
+.login-badge.checking {
+  background: #edf0f5;
+  color: #6b7a96;
+}
+
 .login-subheader span {
   font-size: 12px;
   color: var(--blue-200);

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { loginUser } from '../api/api'
@@ -30,7 +30,32 @@ export default function LoginPage() {
     } finally {
       setLoading(false)
     }
-  }
+
+  } 
+const [serverStatus, setServerStatus] = useState('checking') // 'checking' | 'online' | 'offline'
+
+  useEffect(() => {
+    const checkServer = async () => {
+      try {
+        const controller = new AbortController()
+        const timeout = setTimeout(() => controller.abort(), 4000) // 4s de timeout
+
+        await fetch('http://localhost:8080/auth/health', {
+          method: 'GET',
+          signal: controller.signal,
+        })
+
+        clearTimeout(timeout)
+        setServerStatus('online')
+      } catch {
+        setServerStatus('offline')
+      }
+    }
+
+    checkServer()
+    const interval = setInterval(checkServer, 30000) // verifica a cada 30s
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="login-root">
@@ -87,11 +112,27 @@ export default function LoginPage() {
             <a href="#faq">Perguntas frequentes</a>
           </div>
 
-          <div className="login-info-card">
-            <h3>Manutenção</h3>
+        <div className="login-info-card">
+        <h3>Manutenção</h3>
+        
+
+        {serverStatus === 'checking' && (<>
+            <span className="login-badge checking">Verificando...</span>
+            </>
+        )}
+        {serverStatus === 'online' && (<>
             <p>Sistema disponível 24h por dia.</p>
-            <span className="login-badge">Online</span>
-          </div>
+            <span className="login-badge online">● Online</span>
+            </>
+        )
+
+        }
+        {serverStatus === 'offline' && (<>
+            <p>Sistema em manutenção, volte mais tarde.</p>
+            <span className="login-badge offline">● Offline</span>
+            </>
+        )}
+        </div>
         </aside>
 
         {/* ── Formulário de login ── */}
