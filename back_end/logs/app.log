@@ -1,0 +1,488 @@
+2026-05-16T14:28:35.471-03:00  INFO 9188 --- [main] Project.back_end.BackEndApplication      : Starting BackEndApplication using Java 26.0.1 with PID 9188 (E:\projects\CurriculumLattes\back_end\target\classes started by augus in E:\projects\CurriculumLattes\back_end)
+2026-05-16T14:28:35.473-03:00  INFO 9188 --- [main] Project.back_end.BackEndApplication      : The following 1 profile is active: "prod"
+2026-05-16T14:28:36.544-03:00  INFO 9188 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-16T14:28:36.545-03:00  INFO 9188 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-05-16T14:28:36.592-03:00  INFO 9188 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-16T14:28:36.753-03:00  INFO 9188 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-16T14:28:36.923-03:00  INFO 9188 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-05-16T14:28:36.924-03:00  INFO 9188 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-16T14:28:37.712-03:00  WARN 9188 --- [main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applyScript(Helper.java:255) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportFiles(SchemaCreatorImpl.java:694) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportSources(SchemaCreatorImpl.java:597) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:186) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:120) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:250) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1430) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:974) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.11.jar:3.5.11]
+	at Project.back_end.BackEndApplication.main(BackEndApplication.java:26) ~[classes/:na]
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )"; SQL statement:
+insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS') [23505-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.index.Index.getDuplicateKeyException(Index.java:523) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:184) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:517) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:174) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:304) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:248) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231) ~[h2-2.3.232.jar:2.3.232]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-6.3.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-6.3.3.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	... 38 common frames omitted
+
+2026-05-16T14:28:38.002-03:00  WARN 9188 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-16T14:28:38.735-03:00  INFO 9188 --- [main] Project.back_end.BackEndApplication      : Started BackEndApplication in 3.599 seconds (process running for 3.866)
+2026-05-16T14:28:38.798-03:00  WARN 9188 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-05-16T14:28:38.799-03:00  WARN 9188 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-05-16T14:30:47.888-03:00  INFO 9188 --- [http-nio-8080-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-16T14:30:56.698-03:00  INFO 9188 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-16T14:30:56.699-03:00  INFO 9188 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-16T14:30:59.359-03:00  INFO 26308 --- [main] Project.back_end.BackEndApplication      : Starting BackEndApplication using Java 26.0.1 with PID 26308 (E:\projects\CurriculumLattes\back_end\target\classes started by augus in E:\projects\CurriculumLattes\back_end)
+2026-05-16T14:30:59.360-03:00  INFO 26308 --- [main] Project.back_end.BackEndApplication      : The following 1 profile is active: "prod"
+2026-05-16T14:30:59.990-03:00  INFO 26308 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-16T14:31:00.029-03:00  INFO 26308 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 1 JPA repository interface.
+2026-05-16T14:31:00.511-03:00  INFO 26308 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-16T14:31:00.523-03:00  INFO 26308 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-16T14:31:00.523-03:00  INFO 26308 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-05-16T14:31:00.572-03:00  INFO 26308 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-16T14:31:00.572-03:00  INFO 26308 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1177 ms
+2026-05-16T14:31:00.705-03:00  INFO 26308 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-16T14:31:00.880-03:00  INFO 26308 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-05-16T14:31:00.882-03:00  INFO 26308 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-16T14:31:00.915-03:00  INFO 26308 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-16T14:31:00.955-03:00  INFO 26308 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.42.Final
+2026-05-16T14:31:00.983-03:00  INFO 26308 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-16T14:31:01.193-03:00  INFO 26308 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-16T14:31:01.243-03:00  INFO 26308 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-16T14:31:01.683-03:00  INFO 26308 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-16T14:31:01.709-03:00  WARN 26308 --- [main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applyScript(Helper.java:255) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportFiles(SchemaCreatorImpl.java:694) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportSources(SchemaCreatorImpl.java:597) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:186) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:120) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:250) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1430) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:974) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.11.jar:3.5.11]
+	at Project.back_end.BackEndApplication.main(BackEndApplication.java:26) ~[classes/:na]
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )"; SQL statement:
+insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS') [23505-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.index.Index.getDuplicateKeyException(Index.java:523) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:184) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:517) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:174) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:304) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:248) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231) ~[h2-2.3.232.jar:2.3.232]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-6.3.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-6.3.3.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	... 38 common frames omitted
+
+2026-05-16T14:31:01.713-03:00  INFO 26308 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-16T14:31:02.010-03:00  WARN 26308 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-16T14:31:02.410-03:00  INFO 26308 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-05-16T14:31:02.653-03:00  INFO 26308 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-05-16T14:31:02.660-03:00  INFO 26308 --- [main] Project.back_end.BackEndApplication      : Started BackEndApplication in 3.664 seconds (process running for 3.95)
+2026-05-16T14:31:02.719-03:00  WARN 26308 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-05-16T14:31:02.719-03:00  WARN 26308 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-05-16T14:32:03.371-03:00  INFO 26308 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-16T14:32:03.375-03:00  INFO 26308 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-05-16T14:32:03.378-03:00  INFO 26308 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-16T14:32:03.380-03:00  INFO 26308 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-16T14:32:03.381-03:00  INFO 26308 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-16T14:32:04.824-03:00  INFO 8528 --- [main] Project.back_end.BackEndApplication      : Starting BackEndApplication using Java 26.0.1 with PID 8528 (E:\projects\CurriculumLattes\back_end\target\classes started by augus in E:\projects\CurriculumLattes\back_end)
+2026-05-16T14:32:04.825-03:00  INFO 8528 --- [main] Project.back_end.BackEndApplication      : The following 1 profile is active: "prod"
+2026-05-16T14:32:05.387-03:00  INFO 8528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-16T14:32:05.422-03:00  INFO 8528 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 1 JPA repository interface.
+2026-05-16T14:32:05.848-03:00  INFO 8528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-16T14:32:05.857-03:00  INFO 8528 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-16T14:32:05.858-03:00  INFO 8528 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-05-16T14:32:05.903-03:00  INFO 8528 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-16T14:32:05.904-03:00  INFO 8528 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1046 ms
+2026-05-16T14:32:06.073-03:00  INFO 8528 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-16T14:32:06.121-03:00  INFO 8528 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.42.Final
+2026-05-16T14:32:06.149-03:00  INFO 8528 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-16T14:32:06.360-03:00  INFO 8528 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-16T14:32:06.379-03:00  INFO 8528 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-16T14:32:06.491-03:00  INFO 8528 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-05-16T14:32:06.492-03:00  INFO 8528 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-16T14:32:06.524-03:00  INFO 8528 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-16T14:32:06.970-03:00  INFO 8528 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-16T14:32:06.994-03:00  WARN 8528 --- [main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applyScript(Helper.java:255) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportFiles(SchemaCreatorImpl.java:694) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportSources(SchemaCreatorImpl.java:597) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:186) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:120) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:250) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1430) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:974) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.11.jar:3.5.11]
+	at Project.back_end.BackEndApplication.main(BackEndApplication.java:26) ~[classes/:na]
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )"; SQL statement:
+insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS') [23505-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.index.Index.getDuplicateKeyException(Index.java:523) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:184) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:517) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:174) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:304) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:248) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231) ~[h2-2.3.232.jar:2.3.232]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-6.3.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-6.3.3.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	... 38 common frames omitted
+
+2026-05-16T14:32:06.997-03:00  INFO 8528 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-16T14:32:07.297-03:00  WARN 8528 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-16T14:32:07.716-03:00  INFO 8528 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-05-16T14:32:07.969-03:00  INFO 8528 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-05-16T14:32:07.976-03:00  INFO 8528 --- [main] Project.back_end.BackEndApplication      : Started BackEndApplication in 3.511 seconds (process running for 3.797)
+2026-05-16T14:32:08.042-03:00  WARN 8528 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-05-16T14:32:08.042-03:00  WARN 8528 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-05-16T14:33:24.291-03:00  INFO 8528 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-16T14:33:24.295-03:00  INFO 8528 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-05-16T14:33:24.298-03:00  INFO 8528 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-16T14:33:24.300-03:00  INFO 8528 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-16T14:33:24.301-03:00  INFO 8528 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-16T14:33:26.404-03:00  INFO 12680 --- [main] Project.back_end.BackEndApplication      : Starting BackEndApplication using Java 26.0.1 with PID 12680 (E:\projects\CurriculumLattes\back_end\target\classes started by augus in E:\projects\CurriculumLattes\back_end)
+2026-05-16T14:33:26.406-03:00  INFO 12680 --- [main] Project.back_end.BackEndApplication      : The following 1 profile is active: "prod"
+2026-05-16T14:33:26.971-03:00  INFO 12680 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-16T14:33:27.005-03:00  INFO 12680 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28 ms. Found 1 JPA repository interface.
+2026-05-16T14:33:27.436-03:00  INFO 12680 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-16T14:33:27.446-03:00  INFO 12680 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-16T14:33:27.446-03:00  INFO 12680 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-05-16T14:33:27.495-03:00  INFO 12680 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-16T14:33:27.495-03:00  INFO 12680 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1052 ms
+2026-05-16T14:33:27.643-03:00  INFO 12680 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-16T14:33:27.684-03:00  INFO 12680 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.42.Final
+2026-05-16T14:33:27.706-03:00  INFO 12680 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-16T14:33:27.906-03:00  INFO 12680 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-16T14:33:27.925-03:00  INFO 12680 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-16T14:33:28.039-03:00  INFO 12680 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-05-16T14:33:28.040-03:00  INFO 12680 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-16T14:33:28.075-03:00  INFO 12680 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-16T14:33:28.523-03:00  INFO 12680 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-16T14:33:28.547-03:00  WARN 12680 --- [main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applyScript(Helper.java:255) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportFiles(SchemaCreatorImpl.java:694) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportSources(SchemaCreatorImpl.java:597) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:186) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:120) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:250) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1430) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:974) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.11.jar:3.5.11]
+	at Project.back_end.BackEndApplication.main(BackEndApplication.java:26) ~[classes/:na]
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )"; SQL statement:
+insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS') [23505-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.index.Index.getDuplicateKeyException(Index.java:523) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:184) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:517) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:174) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:304) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:248) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231) ~[h2-2.3.232.jar:2.3.232]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-6.3.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-6.3.3.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	... 38 common frames omitted
+
+2026-05-16T14:33:28.550-03:00  INFO 12680 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-16T14:33:28.845-03:00  WARN 12680 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-16T14:33:29.236-03:00  INFO 12680 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-05-16T14:33:29.489-03:00  INFO 12680 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-05-16T14:33:29.495-03:00  INFO 12680 --- [main] Project.back_end.BackEndApplication      : Started BackEndApplication in 3.42 seconds (process running for 3.717)
+2026-05-16T14:33:29.556-03:00  WARN 12680 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-05-16T14:33:29.556-03:00  WARN 12680 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-05-16T14:35:20.351-03:00  INFO 12680 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-16T14:35:20.355-03:00  INFO 12680 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-05-16T14:35:20.358-03:00  INFO 12680 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-16T14:35:20.359-03:00  INFO 12680 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-16T14:35:20.361-03:00  INFO 12680 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-16T14:35:22.523-03:00  INFO 26628 --- [main] Project.back_end.BackEndApplication      : Starting BackEndApplication using Java 26.0.1 with PID 26628 (E:\projects\CurriculumLattes\back_end\target\classes started by augus in E:\projects\CurriculumLattes\back_end)
+2026-05-16T14:35:22.525-03:00  INFO 26628 --- [main] Project.back_end.BackEndApplication      : The following 1 profile is active: "prod"
+2026-05-16T14:35:23.164-03:00  INFO 26628 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-16T14:35:23.203-03:00  INFO 26628 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 1 JPA repository interface.
+2026-05-16T14:35:23.640-03:00  INFO 26628 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-16T14:35:23.650-03:00  INFO 26628 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-16T14:35:23.650-03:00  INFO 26628 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.52]
+2026-05-16T14:35:23.695-03:00  INFO 26628 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-16T14:35:23.696-03:00  INFO 26628 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1132 ms
+2026-05-16T14:35:23.863-03:00  INFO 26628 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-16T14:35:23.912-03:00  INFO 26628 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.42.Final
+2026-05-16T14:35:23.944-03:00  INFO 26628 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-16T14:35:24.197-03:00  INFO 26628 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-16T14:35:24.216-03:00  INFO 26628 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-16T14:35:24.328-03:00  INFO 26628 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-05-16T14:35:24.329-03:00  INFO 26628 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-16T14:35:24.362-03:00  INFO 26628 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-16T14:35:24.821-03:00  INFO 26628 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-16T14:35:24.846-03:00  WARN 26628 --- [main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS')" via JDBC [Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )";]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.Helper.applyScript(Helper.java:255) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportFiles(SchemaCreatorImpl.java:694) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportSources(SchemaCreatorImpl.java:597) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:186) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:120) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:250) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1430) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:388) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:364) ~[spring-orm-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:974) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:628) ~[spring-context-6.2.16.jar:6.2.16]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.11.jar:3.5.11]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.11.jar:3.5.11]
+	at Project.back_end.BackEndApplication.main(BackEndApplication.java:26) ~[classes/:na]
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_D ON PUBLIC.TB_USER(EMAIL NULLS FIRST) VALUES ( /* 2 */ 'augusto@gmail.com' )"; SQL statement:
+insert into tb_user (email, password) values ('augusto@gmail.com', '$2a$10$p1.c1etOTX83eYVhwGzuU.v11gFy190Ou.LPSR.npOPNgbkfKRPqS') [23505-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.index.Index.getDuplicateKeyException(Index.java:523) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.checkUnique(MVSecondaryIndex.java:223) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVSecondaryIndex.add(MVSecondaryIndex.java:184) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.mvstore.db.MVTable.addRow(MVTable.java:517) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:174) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:304) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.command.Command.executeUpdate(Command.java:248) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262) ~[h2-2.3.232.jar:2.3.232]
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231) ~[h2-2.3.232.jar:2.3.232]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-6.3.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-6.3.3.jar:na]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.6.42.Final.jar:6.6.42.Final]
+	... 38 common frames omitted
+
+2026-05-16T14:35:24.849-03:00  INFO 26628 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-16T14:35:25.187-03:00  WARN 26628 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-16T14:35:25.616-03:00  INFO 26628 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-05-16T14:35:25.844-03:00  INFO 26628 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-05-16T14:35:25.851-03:00  INFO 26628 --- [main] Project.back_end.BackEndApplication      : Started BackEndApplication in 3.682 seconds (process running for 3.952)
+2026-05-16T14:35:25.912-03:00  WARN 26628 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-05-16T14:35:25.912-03:00  WARN 26628 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-05-16T14:35:50.284-03:00  INFO 26628 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-16T14:35:50.288-03:00  INFO 26628 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-05-16T14:35:50.291-03:00  INFO 26628 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-16T14:35:50.292-03:00  INFO 26628 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-16T14:35:50.293-03:00  INFO 26628 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
