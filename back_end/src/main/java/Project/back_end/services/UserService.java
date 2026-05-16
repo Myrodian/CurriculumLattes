@@ -107,8 +107,11 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        List<UserDetailsProjection> dbData =
-                userRepository.loadUserByUsername(username);
+        System.out.println(">>> Buscando usuário: " + username); // ← adicione
+
+        List<UserDetailsProjection> dbData = userRepository.loadUserByUsername(username);
+
+        System.out.println(">>> Resultado da query: " + dbData.size() + " linha(s)"); // ← adicione
 
         if(dbData.isEmpty()) {
             throw new UsernameNotFoundException(username);
