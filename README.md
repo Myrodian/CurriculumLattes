@@ -117,33 +117,17 @@ cd CurriculumLattes
 ```
 
 ### 2. Back-end (Java / Spring Boot)
-
-```bash
-cd back_end
-
-# Com Maven
-./mvnw clean install
-./mvnw spring-boot:run
-
-# Ou com Gradle
-./gradlew build
-./gradlew bootRun
-```
+basta rodar o projeto no arquivo principal `BackEndApplication.java`
 
 O servidor será iniciado em: `http://localhost:8080`
 
 ### 3. Front-end
 
-Abra o arquivo `front_end/index.html` diretamente no navegador, ou sirva com um servidor estático:
+Digite no terminal:
 
 ```bash
 cd front_end
-
-# Opção 1: usando o Python (sem instalação extra)
-python3 -m http.server 3000
-
-# Opção 2: usando o Node.js com http-server
-npx http-server -p 3000
+npm start
 ```
 
 Acesse: `http://localhost:3000`
