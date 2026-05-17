@@ -6,7 +6,6 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 [![CSS](https://img.shields.io/badge/CSS-Estilização-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 [![HTML](https://img.shields.io/badge/HTML-Markup-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
-[![License: MIT](https://img.shields.io/badge/Licença-MIT-green?style=for-the-badge)](LICENSE)
 
 ---
 
@@ -269,7 +268,7 @@ Este projeto adota o [Conventional Commits](https://www.conventionalcommits.org/
 
 ## 👥 Autores
 
-Desenvolvido com 💙 por:
+Desenvolvido por:
 
 - **Myrodian** — [@Myrodian](https://github.com/Myrodian)
 
@@ -277,13 +276,12 @@ Desenvolvido com 💙 por:
 
 ## 📄 Licença
 
-Este projeto está sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto é um trabalho de faculdade voltado para a melhoria do site. Que se torna necessaria para os pesquisadores
 
 ---
 
 <div align="center">
 
-**⭐ Se este projeto foi útil para você, considere deixar uma estrela no repositório!**
 
 [🔼 Voltar ao topo](#-curriculumlattes)
 
