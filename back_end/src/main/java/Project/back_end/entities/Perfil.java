@@ -2,6 +2,8 @@ package Project.back_end.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Objects;
@@ -13,6 +15,8 @@ public class Perfil implements GrantedAuthority{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private String name;
 
     public Perfil(Long id, String name) {

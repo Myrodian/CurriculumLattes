@@ -1,6 +1,12 @@
 package Project.back_end.entities;
 
+import Project.back_end.dto.UserDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,10 +20,27 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Nome não pode ser vazio")
     private String name;
+
     private String phone;
+
+    @NotBlank(message = "O e-mail não pode estar vazio")
+    @Email(message = "Email inválido")
     private String email;
+
+    @Size(min = 6, max = 32, message = "A senha deve conter entre 6 e 32 caracteres")
     private String password;
+
+    @NotBlank(message = "O cpf não pode estar vazio")
+    @CPF(message = "Cpf inválido")
+    @Column(unique = true, length = 14)
+    private String cpf;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant created_at;
@@ -31,6 +54,22 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "id_perfil")
     )
     private Set<Perfil> perfils = new HashSet<Perfil>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "tb_user",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_user")
+    )
+    private Set<UserDTO> friends = new HashSet<UserDTO>();
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public User(Long id, String name, String phone, String email, String password) {
         this.id = id;
@@ -80,6 +119,12 @@ public class User implements UserDetails {
         return perfils;
     }
 
+    public Set<UserDTO> getFriends() { return friends; }
+
+    public void setFriends(Set<UserDTO> friends) { this.friends = friends; }
+
+    public void addFriend(UserDTO newFriend) { this.friends.add(newFriend); }
+
     public String getPassword() {
         return password;
     }
@@ -88,6 +133,10 @@ public class User implements UserDetails {
     public String getUsername() {
         return email;
     }
+
+    public String getCpf() { return cpf; }
+
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -147,6 +196,7 @@ public class User implements UserDetails {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 '}';

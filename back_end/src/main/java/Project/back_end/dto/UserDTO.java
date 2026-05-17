@@ -1,30 +1,51 @@
 package Project.back_end.dto;
 
+import Project.back_end.entities.Address;
 import Project.back_end.entities.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class UserDTO {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Campo nome obrigatório")
+
+    @NotBlank(message = "Nome não pode ser vazio")
     private String name;
+
     private String phone;
-    @NotBlank(message = "Email obrigatório")
+
+    @NotBlank(message = "O e-mail não pode estar vazio")
     @Email(message = "Email inválido")
     private String email;
+
+    @NotBlank(message = "O cpf não pode estar vazio")
+    @CPF(message = "Cpf inválido")
+    @Column(unique = true, length = 14) // Pendente execption handler para chave repetida e numero de caracteres errados
+    private String cpf;
+
+    private Address address;
+
     private List<PerfilDTO> perfils;
 
-    public UserDTO(Long id, String name, String phone, String email) {
+    private Set<UserDTO> friends;
+
+    public UserDTO(Long id, String name, String phone, String email, String cpf, Set<UserDTO>friends, Address address) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.cpf = cpf;
+        this.friends = friends;
+        this.address = address;
     }
 
     public UserDTO(User user) {
@@ -32,9 +53,11 @@ public class UserDTO {
         this.name = user.getName();
         this.phone = user.getPhone();
         this.email = user.getEmail();
+        this.cpf = user.getCpf();
         this.perfils = new ArrayList<>();
-
         user.getPerfils().forEach(perfil -> this.perfils.add(new PerfilDTO(perfil)));
+        this.friends = user.getFriends();
+        this.address = user.getAddress();
     }
 
     public UserDTO() {
@@ -72,6 +95,26 @@ public class UserDTO {
         this.email = email;
     }
 
+    public String getCpf() { return cpf; }
+
+    public void setCpf(String cpf) { this.cpf = cpf; }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<UserDTO> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Set<UserDTO> friends) {
+        this.friends = friends;
+    }
+
     public List<PerfilDTO> getPerfils() {
         return perfils;
     }
@@ -94,11 +137,15 @@ public class UserDTO {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", address=" + address +
+                ", perfils=" + perfils +
+                ", friends=" + friends +
                 '}';
     }
 }
