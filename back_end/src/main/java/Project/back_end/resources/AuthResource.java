@@ -10,6 +10,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthResource {
@@ -21,7 +24,7 @@ public class AuthResource {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthDTO.LoginResponse> login(@RequestBody AuthDTO.LoginRequest request) {
+    public ResponseEntity<?> login(@RequestBody AuthDTO.LoginRequest request) {
 
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password())
@@ -30,7 +33,13 @@ public class AuthResource {
         User user = (User) auth.getPrincipal();
         String token = jwtUtil.generateToken(user.getUsername());
 
-        return ResponseEntity.ok(new AuthDTO.LoginResponse(token, user.getEmail(), user.getName()));
+        Map<String, Object> response = new HashMap<>();
+        response.put("access_token", token);
+        response.put("token_type", "Bearer");
+        response.put("email", user.getEmail());
+        response.put("name", user.getName());
+
+        return ResponseEntity.ok(response);
     }
     @GetMapping("/health")
     public ResponseEntity<String> health() {
