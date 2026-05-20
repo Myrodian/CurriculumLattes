@@ -36,15 +36,15 @@ public class UserDTO {
 
     private List<PerfilDTO> perfils;
 
-    private Set<UserDTO> friends;
+    private Set<UserDTO> connections;
 
-    public UserDTO(Long id, String name, String phone, String email, String cpf, Set<UserDTO>friends, Address address) {
+    public UserDTO(Long id, String name, String phone, String email, String cpf, Set<UserDTO>connections, Address address) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.cpf = cpf;
-        this.friends = friends;
+        this.connections = connections;
         this.address = address;
     }
 
@@ -56,7 +56,7 @@ public class UserDTO {
         this.cpf = user.getCpf();
         this.perfils = new ArrayList<>();
         user.getPerfils().forEach(perfil -> this.perfils.add(new PerfilDTO(perfil)));
-        this.friends = user.getFriends();
+        this.connections = user.getconnections();
         this.address = user.getAddress();
     }
 
@@ -107,12 +107,12 @@ public class UserDTO {
         this.address = address;
     }
 
-    public Set<UserDTO> getFriends() {
-        return friends;
+    public Set<UserDTO> getconnections() {
+        return connections;
     }
 
-    public void setFriends(Set<UserDTO> friends) {
-        this.friends = friends;
+    public void setconnections(Set<UserDTO> connections) {
+        this.connections = connections;
     }
 
     public List<PerfilDTO> getPerfils() {
@@ -145,7 +145,7 @@ public class UserDTO {
                 ", cpf='" + cpf + '\'' +
                 ", address=" + address +
                 ", perfils=" + perfils +
-                ", friends=" + friends +
+                ", connections=" + connections +
                 '}';
     }
 }

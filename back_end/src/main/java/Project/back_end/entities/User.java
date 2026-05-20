@@ -61,15 +61,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_user")
     )
-    private Set<UserDTO> friends = new HashSet<UserDTO>();
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+    private Set<UserDTO> connections = new HashSet<UserDTO>();
 
     public User(Long id, String name, String phone, String email, String password) {
         this.id = id;
@@ -90,6 +82,14 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
     public String getName() {
         return name;
     }
@@ -119,11 +119,11 @@ public class User implements UserDetails {
         return perfils;
     }
 
-    public Set<UserDTO> getFriends() { return friends; }
+    public Set<UserDTO> getconnections() { return connections; }
 
-    public void setFriends(Set<UserDTO> friends) { this.friends = friends; }
+    public void setconnections(Set<UserDTO> connections) { this.connections = connections; }
 
-    public void addFriend(UserDTO newFriend) { this.friends.add(newFriend); }
+    public void addFriend(UserDTO newFriend) { this.connections.add(newFriend); }
 
     public String getPassword() {
         return password;
