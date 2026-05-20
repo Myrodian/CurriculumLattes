@@ -4,7 +4,6 @@ import Project.back_end.dto.UserDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,10 +41,8 @@ public class User implements UserDetails {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant created_at;
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant updated_at;
+    @OneToMany(mappedBy = "user")
+    private List<Publication> publications = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -62,6 +59,11 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "id_user")
     )
     private Set<UserDTO> connections = new HashSet<UserDTO>();
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant created_at;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant updated_at;
 
     public User(Long id, String name, String phone, String email, String password) {
         this.id = id;
@@ -114,16 +116,25 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    public List<Publication> getPublications() {
+        return publications;
+    }
+
+    public void addPublication(Publication publication) {
+        this.publications.add(publication);
+        publication.setAuthor(this);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return perfils;
     }
 
-    public Set<UserDTO> getconnections() { return connections; }
+    public Set<UserDTO> getConnections() { return connections; }
 
-    public void setconnections(Set<UserDTO> connections) { this.connections = connections; }
+    public void setConnections(Set<UserDTO> connections) { this.connections = connections; }
 
-    public void addFriend(UserDTO newFriend) { this.connections.add(newFriend); }
+    public void addConnection(UserDTO newConnection) { this.connections.add(newConnection); }
 
     public String getPassword() {
         return password;

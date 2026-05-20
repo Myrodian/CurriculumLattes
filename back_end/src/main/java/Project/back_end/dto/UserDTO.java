@@ -56,7 +56,7 @@ public class UserDTO {
         this.cpf = user.getCpf();
         this.perfils = new ArrayList<>();
         user.getPerfils().forEach(perfil -> this.perfils.add(new PerfilDTO(perfil)));
-        this.connections = user.getconnections();
+        this.connections = user.getConnections();
         this.address = user.getAddress();
     }
 
@@ -107,11 +107,11 @@ public class UserDTO {
         this.address = address;
     }
 
-    public Set<UserDTO> getconnections() {
+    public Set<UserDTO> getConnections() {
         return connections;
     }
 
-    public void setconnections(Set<UserDTO> connections) {
+    public void setConnections(Set<UserDTO> connections) {
         this.connections = connections;
     }
 
