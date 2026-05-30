@@ -25,10 +25,16 @@ api.interceptors.response.use(
   }
 )
 
-export const loginUser = (email, password) =>
-  api.post('/auth/login', { email, password })
-     .then(res => res.data)
-
+export const loginUser = (email, password) =>{
+  
+  api.post('/auth/login', { email, password },)
+     .then(res => ({
+       ...res.data,
+       token: res.data.access_token  // ← mapeia access_token para token
+       
+     }))
+     console.log('Login request:', { email, password }) // log para depuração
+    }
 export const getUsers = (page = 0, size = 10) =>
   api.get(`/users?page=${page}&size=${size}`).then(res => res.data)
 
