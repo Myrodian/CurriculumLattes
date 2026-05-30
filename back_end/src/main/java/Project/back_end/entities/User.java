@@ -1,6 +1,5 @@
 package Project.back_end.entities;
 
-import Project.back_end.dto.UserDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -41,9 +40,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "user")
-    private List<Publication> publications = new ArrayList<>();
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tb_user_perfil",
@@ -51,14 +47,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "id_perfil")
     )
     private Set<Perfil> perfils = new HashSet<Perfil>();
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "tb_user",
-            joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_user")
-    )
-    private Set<UserDTO> connections = new HashSet<UserDTO>();
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant created_at;
@@ -116,25 +104,10 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public List<Publication> getPublications() {
-        return publications;
-    }
-
-    public void addPublication(Publication publication) {
-        this.publications.add(publication);
-        publication.setAuthor(this);
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return perfils;
     }
-
-    public Set<UserDTO> getConnections() { return connections; }
-
-    public void setConnections(Set<UserDTO> connections) { this.connections = connections; }
-
-    public void addConnection(UserDTO newConnection) { this.connections.add(newConnection); }
 
     public String getPassword() {
         return password;

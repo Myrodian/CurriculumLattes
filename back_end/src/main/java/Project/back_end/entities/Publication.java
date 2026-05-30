@@ -13,26 +13,21 @@ public class Publication {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private User author;
+    private Long author_id;
 
     public Publication() {
     }
 
     public Publication(Long id, User author) {
         this.id = id;
-        this.author = author;
+        this.author_id = author.getId();
     }
 
     public Long getId() {
         return id;
     }
 
-    public User getAuthor() {
-        return author;
-    }
-
     public void setAuthor(User author) {
-        this.author = author;
-        author.addPublication(this);
+        this.author_id = author.getId();
     }
 }
