@@ -1,6 +1,10 @@
 package Project.back_end.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,15 +18,27 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Nome não pode ser vazio")
     private String name;
+
     private String phone;
+
+    @NotBlank(message = "O e-mail não pode estar vazio")
+    @Email(message = "Email inválido")
     private String email;
+
+    @Size(min = 6, max = 32, message = "A senha deve conter entre 6 e 32 caracteres")
     private String password;
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant created_at;
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant updated_at;
+    @NotBlank(message = "O cpf não pode estar vazio")
+    @CPF(message = "Cpf inválido")
+    @Column(unique = true, length = 14)
+    private String cpf;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -31,6 +47,11 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "id_perfil")
     )
     private Set<Perfil> perfils = new HashSet<Perfil>();
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant created_at;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant updated_at;
 
     public User(Long id, String name, String phone, String email, String password) {
         this.id = id;
@@ -51,6 +72,14 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+    
     public String getName() {
         return name;
     }
@@ -88,6 +117,10 @@ public class User implements UserDetails {
     public String getUsername() {
         return email;
     }
+
+    public String getCpf() { return cpf; }
+
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -147,6 +180,7 @@ public class User implements UserDetails {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 '}';
