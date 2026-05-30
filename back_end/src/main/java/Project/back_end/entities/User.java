@@ -3,7 +3,6 @@ package Project.back_end.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +27,6 @@ public class User implements UserDetails {
     @Email(message = "Email inválido")
     private String email;
 
-    @Size(min = 6, max = 32, message = "A senha deve conter entre 6 e 32 caracteres")
     private String password;
 
     @NotBlank(message = "O cpf não pode estar vazio")
