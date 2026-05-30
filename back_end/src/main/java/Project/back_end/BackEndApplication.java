@@ -15,10 +15,10 @@ public class BackEndApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		String teste =
-				passwordEncoder.encode("123456");
-		System.out.println("===============================");
-		System.out.println(teste);
+//		String teste =
+//				passwordEncoder.encode("123456");
+//		System.out.println("===============================");
+//		System.out.println(teste);
 
 	}
 
