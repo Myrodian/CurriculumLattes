@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthResource {
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<AuthDTO.LoginResponse> login(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.ok(new AuthDTO.LoginResponse(user.getEmail(), user.getName()));

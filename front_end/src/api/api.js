@@ -4,20 +4,23 @@ const api = axios.create({
   baseURL: 'http://localhost:8080',
 })
 
-// injeta token em todas as requisições
+// injeta credenciais Basic Auth em todas as requisições (exceto quando já há um header próprio)
 api.interceptors.request.use(config => {
-  const token = localStorage.getItem('token')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+  if (!config.headers.Authorization) {
+    const credentials = localStorage.getItem('token')
+    if (credentials) {
+      config.headers.Authorization = `Basic ${credentials}`
+    }
   }
   return config
 })
 
-// redireciona ao login se token expirar
+// redireciona ao login se token expirar (ignora falha de autenticação na própria rota de login)
 api.interceptors.response.use(
   res => res,
   err => {
-    if (err.response?.status === 401) {
+    const isLoginEndpoint = err.config?.url?.includes('/auth/login')
+    if (err.response?.status === 401 && !isLoginEndpoint) {
       localStorage.removeItem('token')
       window.location.href = '/login'
     }
@@ -25,16 +28,13 @@ api.interceptors.response.use(
   }
 )
 
-export const loginUser = (email, password) =>{
-  
-  api.post('/auth/login', { email, password },)
-     .then(res => ({
-       ...res.data,
-       token: res.data.access_token  // ← mapeia access_token para token
-       
-     }))
-     console.log('Login request:', { email, password }) // log para depuração
-    }
+export const loginUser = async (email, password) => {
+  const credentials = btoa(`${email}:${password}`)
+  const res = await api.post('/auth/login', null, {
+    headers: { Authorization: `Basic ${credentials}` },
+  })
+  return { ...res.data, token: credentials }
+}
 export const getUsers = (page = 0, size = 10) =>
   api.get(`/users?page=${page}&size=${size}`).then(res => res.data)
 

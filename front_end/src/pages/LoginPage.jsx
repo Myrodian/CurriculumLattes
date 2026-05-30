@@ -233,9 +233,6 @@ const [serverStatus, setServerStatus] = useState('checking') // 'checking' | 'on
                       </>
                     )}
                   </button>
-                  <a href="#cancelar" className="btn-secondary">
-                    Cancelar
-                  </a>
                 </div>
               </form>
             </div>

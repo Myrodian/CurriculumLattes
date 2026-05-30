@@ -67,12 +67,15 @@ public class UserService implements UserDetailsService {
     private void copyDtoToUser(UserDTO dto, User user) {
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
-
         user.setPhone(dto.getPhone());
+        user.setCpf(dto.getCpf());
+
         user.getPerfils().clear();
-        for(PerfilDTO perfilDTO : dto.getPerfils()){
-            Perfil perfil = perfilRepository.getReferenceById(perfilDTO.getId());
-            user.getPerfils().add(perfil);
+        if (dto.getPerfils() != null) {
+            for (PerfilDTO perfilDTO : dto.getPerfils()) {
+                Perfil perfil = perfilRepository.getReferenceById(perfilDTO.getId());
+                user.getPerfils().add(perfil);
+            }
         }
     }
 
@@ -119,6 +122,7 @@ public class UserService implements UserDetailsService {
         User user = new User();
         user.setPassword(dbData.getFirst().getPassword());
         user.setEmail(dbData.getFirst().getUsername());
+        user.setName(dbData.getFirst().getName());
 
         for(UserDetailsProjection data : dbData){
             user.addRole(
