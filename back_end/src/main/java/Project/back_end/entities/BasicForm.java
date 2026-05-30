@@ -3,8 +3,8 @@ package Project.back_end.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_publication")
-public class Publication {
+@Table(name = "tb_basic_form")
+public class BasicForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,11 +13,12 @@ public class Publication {
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User author;
+    
 
-    public Publication() {
+    public BasicForm() {
     }
 
-    public Publication(Long id, User author) {
+    public BasicForm(Long id, User author) {
         this.id = id;
         this.author = author;
     }
@@ -32,5 +33,9 @@ public class Publication {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public User getAuthor(){
+        return this.author;
     }
 }
