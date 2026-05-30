@@ -1,0 +1,58 @@
+# ── Back-end (Maven / Spring Boot) ──────────────────────────────
+back_end/target/
+back_end/.mvn/wrapper/maven-wrapper.jar
+back_end/HELP.md
+back_end/*.properties
+back_end/logs/
+!back_end/**/src/main/**/target/
+!back_end/**/src/test/**/target/
+!back_end/**/src/main/**/build/
+!back_end/**/src/test/**/build/
+
+# STS
+back_end/.apt_generated
+back_end/.classpath
+back_end/.factorypath
+back_end/.project
+back_end/.settings
+back_end/.springBeans
+back_end/.sts4-cache
+
+# NetBeans
+back_end/nbproject/private/
+back_end/nbbuild/
+back_end/dist/
+back_end/nbdist/
+back_end/.nb-gradle/
+
+# ── Front-end (Node / React) ─────────────────────────────────────
+front_end/node_modules/
+front_end/.pnp
+front_end/.pnp.js
+front_end/coverage/
+front_end/build/
+front_end/.env.local
+front_end/.env.development.local
+front_end/.env.test.local
+front_end/.env.production.local
+front_end/npm-debug.log*
+front_end/yarn-debug.log*
+front_end/yarn-error.log*
+
+# ── IDEs ─────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.iws
+*.iml
+*.ipr
+
+# ── OS ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Logs ─────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ── Claude Code ──────────────────────────────────────────────────
+CLAUDE.md
