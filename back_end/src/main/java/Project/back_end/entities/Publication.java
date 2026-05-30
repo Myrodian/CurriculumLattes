@@ -1,6 +1,5 @@
 package Project.back_end.entities;
 
-import Project.back_end.dto.UserDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,14 +12,14 @@ public class Publication {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private Long author_id;
+    private User author;
 
     public Publication() {
     }
 
     public Publication(Long id, User author) {
         this.id = id;
-        this.author_id = author.getId();
+        this.author = author;
     }
 
     public Long getId() {
@@ -28,6 +27,6 @@ public class Publication {
     }
 
     public void setAuthor(User author) {
-        this.author_id = author.getId();
+        this.author = author;
     }
 }

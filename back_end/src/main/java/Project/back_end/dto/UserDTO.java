@@ -56,7 +56,6 @@ public class UserDTO {
         this.cpf = user.getCpf();
         this.perfils = new ArrayList<>();
         user.getPerfils().forEach(perfil -> this.perfils.add(new PerfilDTO(perfil)));
-        this.connections = user.getConnections();
         this.address = user.getAddress();
     }
 
