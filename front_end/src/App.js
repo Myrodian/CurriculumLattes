@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import CadastroPage from './pages/CadastroPage';
+import ProfilePage from './pages/ProfilePage';
+import FeedPage from './pages/FeedPage';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -8,6 +10,8 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/cadastro" element={<CadastroPage />} />
+      <Route path="/perfil" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+      <Route path="/feed" element={<PrivateRoute><FeedPage /></PrivateRoute>} />
       <Route
         path="/dashboard"
         element={

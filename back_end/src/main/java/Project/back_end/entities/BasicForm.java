@@ -13,7 +13,6 @@ public class BasicForm {
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User author;
-    
 
     public BasicForm() {
     }
@@ -35,7 +34,4 @@ public class BasicForm {
         this.author = author;
     }
 
-    public User getAuthor(){
-        return this.author;
-    }
 }
