@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="318402fb-cfde-4c43-8ec5-74f573fd2194" name="Changes" comment="" />
+    <list default="true" id="318402fb-cfde-4c43-8ec5-74f573fd2194" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/front_end/src/pages/ProdutoPage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front_end/src/pages/ProdutoPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front_end/src/pages/ProjetoEnsinoPage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front_end/src/pages/ProjetoEnsinoPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front_end/src/pages/TrabalhosTecnicosPage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front_end/src/pages/TrabalhosTecnicosPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/App.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +22,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="3DwclguXeIzTL2N9Dp3IunRQzzQ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -25,12 +37,28 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "javascript.preferred.runtime.type.id": "node",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/luis_/OneDrive/Desktop/Faculdade/B - Breck-end/CurriculumLattes"
+    "last_opened_file_path": "C:/Users/User/IdeaProjects/CurriculumLattes/front_end/src/pages",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "C:/Users/User/AppData/Roaming/JetBrains/IntelliJIdea2026.1/node/versions/24.16.0/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.language",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\CurriculumLattes\front_end\src\pages" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BackEndApplication.java" />
@@ -43,7 +71,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
       </set>
     </attachedChunks>
   </component>
@@ -54,7 +83,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779196726991</updated>
+      <workItem from="1780175017760" duration="5121000" />
+      <workItem from="1780184473122" duration="1642000" />
+      <workItem from="1780201783683" duration="140000" />
+      <workItem from="1780358194548" duration="3685000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
