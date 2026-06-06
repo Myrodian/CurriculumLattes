@@ -1,113 +1,143 @@
-# 📄 CurriculumLattes
+# CurriculumLattes
 
-> **Plataforma web para extração, visualização e gerenciamento de dados do Currículo Lattes**
+> Plataforma web para gerenciamento de currículos acadêmicos no estilo Lattes, com autenticação, perfis de usuário e registro de produção acadêmica.
 
-[![Java](https://img.shields.io/badge/Java-Backend-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
-[![CSS](https://img.shields.io/badge/CSS-Estilização-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
-[![HTML](https://img.shields.io/badge/HTML-Markup-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
-
----
-
-## 📋 Índice
-
-- [Sobre o Projeto](#-sobre-o-projeto)
-- [Funcionalidades](#-funcionalidades)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Arquitetura](#-arquitetura)
-- [Pré-requisitos](#-pré-requisitos)
-- [Instalação e Execução](#-instalação-e-execução)
-- [Estrutura de Pastas](#-estrutura-de-pastas)
-- [Como Usar](#-como-usar)
-- [API Reference](#-api-reference)
-- [Contribuindo](#-contribuindo)
-- [Autores](#-autores)
-- [Licença](#-licença)
+[![Java](https://img.shields.io/badge/Java_21-Backend-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot_3.5-API-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![React](https://img.shields.io/badge/React_19-Frontend-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Banco-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Containers-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
 ---
 
-## 🎯 Sobre o Projeto
+## Índice
 
-O **CurriculumLattes** é uma aplicação web full-stack desenvolvida para facilitar o acesso e a visualização de informações contidas nos Currículos Lattes da Plataforma CNPq. A ferramenta permite que pesquisadores, instituições e gestores de ciência e tecnologia extraiam, organizem e consultem dados acadêmicos de forma ágil e intuitiva, sem a necessidade de navegar manualmente pelo portal do CNPq.
-
-### Motivação
-
-O Currículo Lattes é o padrão nacional de registro da vida pregressa e atual dos pesquisadores brasileiros. No entanto, a extração automatizada e a visualização estruturada de seus dados ainda é um desafio técnico relevante — especialmente para projetos de análise bibliométrica, gestão de grupos de pesquisa e relatórios institucionais. Este projeto nasce para resolver essa lacuna.
-
----
-
-## ✨ Funcionalidades
-
-- 🔍 **Busca e extração** de dados a partir do identificador Lattes (ID numérico)
-- 👤 **Visualização do perfil** do pesquisador: dados pessoais, formação acadêmica, área de atuação
-- 📚 **Listagem de produções bibliográficas**: artigos, livros, capítulos, trabalhos em eventos
-- 🏛️ **Vínculos institucionais** e histórico de atuação profissional
-- 🎓 **Orientações** concluídas e em andamento
-- 📊 **Projetos de pesquisa** e participação em grupos de pesquisa
-- 🌐 **Interface web responsiva** para consulta via browser
-- ⚙️ **API REST** para integração com outros sistemas
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias](#tecnologias)
+- [Arquitetura](#arquitetura)
+- [Pré-requisitos](#pré-requisitos)
+- [Execução com Docker](#execução-com-docker)
+- [Execução local (desenvolvimento)](#execução-local-desenvolvimento)
+- [Estrutura de Pastas](#estrutura-de-pastas)
+- [API Reference](#api-reference)
+- [Variáveis de Ambiente](#variáveis-de-ambiente)
+- [Contribuindo](#contribuindo)
+- [Autores](#autores)
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## Sobre o Projeto
+
+O **CurriculumLattes** é uma aplicação full-stack que permite a pesquisadores, estudantes e administradores gerenciar seus dados acadêmicos: produção bibliográfica, projetos de ensino, trabalhos técnicos e apresentações.
+
+O sistema conta com autenticação via JWT, controle de acesso por perfis (Administrador, Pesquisador, Estudante) e uma interface inspirada na Plataforma Lattes do CNPq.
+
+---
+
+## Funcionalidades
+
+- Cadastro e autenticação de usuários (JWT via Basic Auth)
+- Perfis de acesso: `ROLE_ADMINISTRADOR`, `ROLE_PESQUISADOR`, `ROLE_ESTUDANTE`
+- Feed de publicações acadêmicas
+- Página de perfil do usuário
+- Registro de produção acadêmica:
+  - Apresentações de trabalho
+  - Produtos tecnológicos
+  - Projetos de ensino
+  - Trabalhos técnicos
+- Rotas protegidas no frontend com redirecionamento automático
+- Banco de dados persistente via volume Docker
+
+---
+
+## Tecnologias
 
 ### Back-end
-| Tecnologia | Versão | Descrição |
-|---|---|---|
-| Java | 11+ | Linguagem principal do servidor |
-| Spring Boot | 2.x | Framework para API REST |
-| Maven / Gradle | — | Gerenciamento de dependências |
-| XML Parsing | — | Leitura e parsing do XML Lattes |
+| Tecnologia | Versão |
+|---|---|
+| Java | 21 |
+| Spring Boot | 3.5 |
+| Spring Security | JWT via Basic Auth |
+| Spring Data JPA | Hibernate + PostgreSQL |
+| Spring Mail | SMTP |
+| Springdoc OpenAPI | Swagger UI |
+| PostgreSQL | 16 |
 
 ### Front-end
-| Tecnologia | Descrição |
+| Tecnologia | Versão |
 |---|---|
-| HTML5 | Estrutura das páginas |
-| CSS3 | Estilização e layout responsivo |
-| JavaScript (ES6+) | Interatividade e consumo da API |
+| React | 19 |
+| React Router DOM | v6 |
+| Axios | — |
+
+### Infraestrutura
+| Ferramenta | Uso |
+|---|---|
+| Docker + Docker Compose | Orquestração dos containers |
+| Nginx | Serve o frontend em produção |
+| pgAdmin 4 | Interface visual do banco de dados |
 
 ---
 
-## 🏗 Arquitetura
-
-O projeto segue uma arquitetura **cliente-servidor** desacoplada:
+## Arquitetura
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                        CLIENTE                          │
-│                                                         │
-│   [ HTML ]  ──►  [ CSS ]  ──►  [ JavaScript ]          │
-│                                      │                  │
-│                               fetch / AJAX              │
-└──────────────────────────────────────┼──────────────────┘
-                                       │ HTTP / REST
-┌──────────────────────────────────────┼──────────────────┐
-│                       SERVIDOR       │                  │
-│                                      ▼                  │
-│              [ Spring Boot Controllers ]                │
-│                          │                              │
-│               [ Service / Business Layer ]              │
-│                          │                              │
-│               [ XML Parser - Lattes API ]               │
-│                          │                              │
-│              [ Plataforma CNPq / XML Lattes ]           │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│  Browser  :3000                                             │
+│  React 19 + React Router + Axios                            │
+│  AuthContext (JWT no localStorage)                          │
+└──────────────────────────┬──────────────────────────────────┘
+                           │ HTTP/REST (Basic Auth → JWT)
+┌──────────────────────────▼──────────────────────────────────┐
+│  Spring Boot :8080                                          │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────────┐ │
+│  │ Resource │  │ Service  │  │   JPA    │  │ JwtFilter  │ │
+│  │ (REST)   │→ │(Business)│→ │Repository│  │ + Security │ │
+│  └──────────┘  └──────────┘  └──────────┘  └────────────┘ │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+┌──────────────────────────▼──────────────────────────────────┐
+│  PostgreSQL :5432                                           │
+│  Volume persistente: curriculumlattes_postgres_data         │
+└─────────────────────────────────────────────────────────────┘
 ```
 
+### Camadas do back-end
+
+```
+resources/    → Controllers REST (camada HTTP)
+services/     → Regras de negócio, implementa UserDetailsService
+repositories/ → Interfaces Spring Data JPA
+entities/     → Entidades JPA (User, Perfil, Address, BasicForm)
+dto/          → Objetos de requisição/resposta
+config/       → Segurança, JWT, CORS, PasswordEncoder
+projections/  → Projeções JPA para queries de segurança
+```
+
+### Fluxo de autenticação
+
+1. `POST /auth/login` com header `Authorization: Basic base64(email:senha)`
+2. Backend valida credenciais e retorna dados do usuário
+3. Frontend armazena as credenciais em Base64 no `localStorage` como token
+4. Todas as requisições seguintes incluem o header `Authorization: Basic {token}`
+5. `PrivateRoute` verifica `isAuthenticated` do `AuthContext` antes de renderizar páginas protegidas
+
 ---
 
-## ✅ Pré-requisitos
+## Pré-requisitos
 
-Antes de iniciar, certifique-se de ter instalado:
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (recomendado para subir tudo junto)
 
-- **Java JDK 11** ou superior → [Download](https://adoptium.net/)
-- **Maven 3.6+** ou **Gradle** → [Download Maven](https://maven.apache.org/download.cgi)
-- **Node.js** (opcional, para servir o front-end localmente) → [Download](https://nodejs.org/)
-- **Git** → [Download](https://git-scm.com/)
+Para desenvolvimento local sem Docker:
+- Java 21
+- Maven 3.9+
+- Node.js 20+
+- PostgreSQL 16
 
 ---
 
-## 🚀 Instalação e Execução
+## Execução com Docker
 
 ### 1. Clone o repositório
 
@@ -116,17 +146,70 @@ git clone https://github.com/Myrodian/CurriculumLattes.git
 cd CurriculumLattes
 ```
 
-### 2. Back-end (Java / Spring Boot)
-basta rodar o projeto no arquivo principal `BackEndApplication.java`
+### 2. Configure as variáveis de ambiente (opcional)
 
-O servidor será iniciado em: `http://localhost:8080`
+```bash
+cp .env.example .env
+# edite .env com seus valores (JWT_SECRET, credenciais de e-mail, etc.)
+```
 
-### 3. Front-end
+Sem o `.env`, o Docker Compose usa os valores padrão definidos no `docker-compose.yml`.
 
-Digite no terminal:
+### 3. Suba os containers
+
+```bash
+docker compose up --build
+```
+
+| Serviço | URL |
+|---|---|
+| Frontend | http://localhost:3000 |
+| Backend (API) | http://localhost:8080 |
+| Swagger UI | http://localhost:8080/swagger-ui.html |
+| pgAdmin | http://localhost:5050 |
+
+**Login padrão do pgAdmin:** `admin@admin.com` / `admin`
+
+**Conexão ao banco no pgAdmin:**
+- Host: `db`
+- Port: `5432`
+- Database: `lattes`
+- Username/Password: `lattes`
+
+### Usuários seed (criados na primeira inicialização)
+
+| E-mail | Senha | Perfil |
+|---|---|---|
+| `Glauberson@gmail.com` | `123456` | Administrador |
+| `claudio@gmail.com` | `123456` | Pesquisador + Estudante |
+
+---
+
+## Execução local (desenvolvimento)
+
+### Back-end
+
+```bash
+cd back_end
+./mvnw spring-boot:run
+```
+
+Requer PostgreSQL rodando em `localhost:5432` com banco `lattes` e usuário `lattes`.
+Se preferir, suba apenas o banco via Docker:
+
+```bash
+docker compose up db
+```
+
+URLs úteis:
+- Swagger UI: `http://localhost:8080/swagger-ui.html`
+- Health check: `http://localhost:8080/auth/health`
+
+### Front-end
 
 ```bash
 cd front_end
+npm install
 npm start
 ```
 
@@ -134,139 +217,126 @@ Acesse: `http://localhost:3000`
 
 ---
 
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 CurriculumLattes/
+├── back_end/
+│   ├── src/main/java/Project/back_end/
+│   │   ├── config/          # SecurityConfig, PasswordConfig
+│   │   ├── dto/             # UserDTO, UserInsertDTO, AuthDTO, PerfilDTO
+│   │   ├── entities/        # User, Perfil, Address, BasicForm
+│   │   ├── projections/     # UserDetailsProjection
+│   │   ├── repositories/    # UserRepository, PerfilRepository
+│   │   ├── resources/       # UserResource, AuthResource
+│   │   └── services/        # UserService
+│   ├── src/main/resources/
+│   │   ├── application.properties
+│   │   └── data.sql         # Seed inicial (perfis + usuários)
+│   ├── Dockerfile
+│   └── pom.xml
 │
-├── back_end/                   # Código do servidor Java
+├── front_end/
 │   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/           # Classes Java (controllers, services, models)
-│   │   │   └── resources/      # application.properties, configurações
-│   │   └── test/               # Testes unitários e de integração
-│   ├── pom.xml                 # Dependências Maven
-│   └── README.md
+│   │   ├── api/             # api.js (Axios + interceptors)
+│   │   ├── components/      # PrivateRoute
+│   │   ├── context/         # AuthContext
+│   │   └── pages/           # LoginPage, CadastroPage, FeedPage, ProfilePage,
+│   │                        # ApresentacaoPage, ProdutoPage,
+│   │                        # ProjetoEnsinoPage, TrabalhosTecnicosPage
+│   ├── Dockerfile
+│   └── nginx.conf
 │
-├── front_end/                  # Código do cliente web
-│   ├── index.html              # Página principal
-│   ├── css/                    # Folhas de estilo
-│   ├── js/                     # Scripts JavaScript
-│   └── assets/                 # Imagens e recursos estáticos
-│
-└── README.md                   # Este arquivo
+├── docker-compose.yml
+├── .env.example
+└── README.md
 ```
 
 ---
 
-## 💡 Como Usar
+## API Reference
 
-1. Com a aplicação em execução, acesse `http://localhost:3000` no navegador.
-2. Insira o **ID Lattes** do pesquisador no campo de busca (ex: `1234567890123456`).
-3. Clique em **Buscar** para carregar os dados do currículo.
-4. Navegue pelas abas para visualizar as diferentes seções: produção bibliográfica, formação, orientações, projetos etc.
+A documentação completa está disponível no Swagger UI em `http://localhost:8080/swagger-ui.html`.
 
-> 💡 **Dica**: O ID Lattes de um pesquisador pode ser encontrado na URL do seu currículo no site do CNPq: `http://lattes.cnpq.br/<ID>`
+### Endpoints principais
 
----
+| Método | Endpoint | Acesso | Descrição |
+|---|---|---|---|
+| `POST` | `/auth/login` | Público | Autenticação (Basic Auth) |
+| `GET` | `/auth/health` | Público | Health check |
+| `POST` | `/users` | Público | Cadastro de novo usuário |
+| `GET` | `/users` | Autenticado | Lista usuários (paginado) |
+| `GET` | `/users/{id}` | Autenticado | Busca usuário por ID |
+| `PUT` | `/users/{id}` | Autenticado | Atualiza usuário |
+| `DELETE` | `/users/{id}` | Autenticado | Remove usuário |
 
-## 📡 API Reference
+### Exemplo de cadastro
 
-A API REST exposta pelo back-end segue o padrão RESTful:
-
-### `GET /api/curriculo/{id}`
-
-Retorna os dados completos do currículo Lattes para o ID informado.
-
-**Parâmetros:**
-
-| Parâmetro | Tipo | Descrição |
-|---|---|---|
-| `id` | `string` | ID numérico do Currículo Lattes |
-
-**Exemplo de resposta:**
-
-```json
-{
-  "nome": "João da Silva",
-  "nacionalidade": "Brasileira",
-  "formacao": [
-    {
-      "nivel": "Doutorado",
-      "area": "Ciência da Computação",
-      "instituicao": "Universidade de São Paulo",
-      "ano_conclusao": 2015
-    }
-  ],
-  "producao_bibliografica": {
-    "artigos": 42,
-    "livros": 3,
-    "capitulos": 10
-  }
-}
+```bash
+curl -X POST http://localhost:8080/users \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Maria Silva",
+    "email": "maria@email.com",
+    "cpf": "123.456.789-09",
+    "password": "senha123",
+    "perfils": [{ "id": 2 }]
+  }'
 ```
 
-**Códigos de resposta:**
+### Perfis disponíveis
 
-| Código | Descrição |
+| ID | Role |
 |---|---|
-| `200 OK` | Currículo encontrado e retornado com sucesso |
-| `404 Not Found` | Currículo não encontrado para o ID informado |
-| `500 Internal Server Error` | Erro interno ao processar o currículo |
+| 1 | `ROLE_ADMINISTRADOR` |
+| 2 | `ROLE_PESQUISADOR` |
+| 3 | `ROLE_ESTUDANTE` |
 
 ---
 
-## 🤝 Contribuindo
+## Variáveis de Ambiente
 
-Contribuições são sempre bem-vindas! Para contribuir:
+Copie `.env.example` para `.env` e ajuste conforme necessário:
 
-1. **Fork** este repositório
-2. Crie uma **branch** para sua feature:
-   ```bash
-   git checkout -b feature/minha-feature
-   ```
-3. **Commit** suas alterações:
-   ```bash
-   git commit -m "feat: adiciona funcionalidade X"
-   ```
-4. **Push** para sua branch:
-   ```bash
-   git push origin feature/minha-feature
-   ```
-5. Abra um **Pull Request** descrevendo suas mudanças.
+| Variável | Padrão | Descrição |
+|---|---|---|
+| `POSTGRES_USER` | `lattes` | Usuário do banco |
+| `POSTGRES_PASSWORD` | `lattes` | Senha do banco |
+| `JWT_SECRET` | *(valor padrão)* | Chave HMAC-SHA512 para assinar tokens (mínimo 64 chars) |
+| `JWT_DURATION` | `86400` | Expiração do token em segundos (24h) |
+| `CORS_ORIGINS` | `http://localhost:3000` | Origens permitidas pelo CORS |
+| `EMAIL_HOST` | `smtp.gmail.com` | Servidor SMTP |
+| `EMAIL_PORT` | `587` | Porta SMTP |
+| `EMAIL_USERNAME` | *(vazio)* | E-mail para envio |
+| `EMAIL_PASSWORD` | *(vazio)* | Senha do e-mail |
+| `PGADMIN_EMAIL` | `admin@admin.com` | Login do pgAdmin |
+| `PGADMIN_PASSWORD` | `admin` | Senha do pgAdmin |
 
-### Padrão de commits
+---
 
-Este projeto adota o [Conventional Commits](https://www.conventionalcommits.org/):
+## Contribuindo
+
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature: `git checkout -b feat/minha-feature`
+3. Commit seguindo Conventional Commits: `git commit -m "feat: adiciona X"`
+4. Abra um Pull Request
 
 | Prefixo | Uso |
 |---|---|
 | `feat:` | Nova funcionalidade |
 | `fix:` | Correção de bug |
-| `docs:` | Alterações na documentação |
-| `style:` | Formatação, sem mudança de lógica |
-| `refactor:` | Refatoração de código |
-| `test:` | Adição ou correção de testes |
+| `docs:` | Documentação |
+| `refac:` | Refatoração |
+| `test:` | Testes |
 
 ---
 
-## 👥 Autores
-
-Desenvolvido por:
+## Autores
 
 - **Myrodian** — [@Myrodian](https://github.com/Myrodian)
 
 ---
 
-## 📄 Licença
+Este projeto é um trabalho acadêmico desenvolvido para o IFMG — Instituto Federal de Minas Gerais, câmpus Formiga.
 
-Este projeto é um trabalho de faculdade voltado para a melhoria do site. Que se torna necessaria para os pesquisadores
-
----
-
-<div align="center">
-
-
-[🔼 Voltar ao topo](#-curriculumlattes)
-
-</div>
+[Voltar ao topo](#curriculumlattes)
