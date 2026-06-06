@@ -17,6 +17,7 @@ public class Perfil implements GrantedAuthority{
     private Long id;
 
     @NotNull
+    @Column(unique = true)
     private String name;
 
     public Perfil(Long id, String name) {

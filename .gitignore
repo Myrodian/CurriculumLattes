@@ -2,7 +2,7 @@
 back_end/target/
 back_end/.mvn/wrapper/maven-wrapper.jar
 back_end/HELP.md
-back_end/*.properties
+back_end/src/main/resources/application-local.properties
 back_end/logs/
 !back_end/**/src/main/**/target/
 !back_end/**/src/test/**/target/
@@ -53,6 +53,9 @@ Thumbs.db
 # ── Logs ─────────────────────────────────────────────────────────
 logs/
 *.log
+
+# ── Environment secrets ──────────────────────────────────────────
+.env
 
 # ── Claude Code ──────────────────────────────────────────────────
 CLAUDE.md
