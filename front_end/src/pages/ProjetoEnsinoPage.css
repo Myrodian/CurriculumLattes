@@ -46,6 +46,11 @@
 .projeto-ensino-info-card p { font-size: 13px; color: var(--gray-700); line-height: 1.6; margin-bottom: 0.5rem; }
 .projeto-ensino-info-card a { color: var(--blue-700); font-size: 13px; text-decoration: none; display: block; padding: 2px 0; transition: color 0.15s; }
 .projeto-ensino-info-card a:hover { color: var(--blue-600); text-decoration: underline; }
+.projeto-ensino-lista { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; max-height: 320px; overflow-y: auto; }
+.projeto-ensino-lista li { padding-bottom: 0.6rem; border-bottom: 1px solid var(--gray-100); }
+.projeto-ensino-lista li:last-child { padding-bottom: 0; border-bottom: none; }
+.projeto-ensino-lista strong { display: block; font-size: 13px; font-weight: 600; color: var(--gray-900); line-height: 1.35; }
+.projeto-ensino-lista span { font-size: 12px; color: var(--gray-500); }
 
 /* ── Form card ── */
 .projeto-ensino-form-wrapper { flex: 1; max-width: 640px; }

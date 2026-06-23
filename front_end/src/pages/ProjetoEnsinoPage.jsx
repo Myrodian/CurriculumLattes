@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { createProjetoEnsino, getMeusProjetosEnsino } from '../api/api'
 import './ProjetoEnsinoPage.css'
 
 const SITUACAO_OPTIONS = [
@@ -18,6 +19,13 @@ export default function ProjetoEnsinoPage() {
   const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [itens, setItens] = useState([])
+
+  const carregarItens = () => {
+    getMeusProjetosEnsino().then(setItens).catch(() => {})
+  }
+
+  useEffect(() => { carregarItens() }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -42,8 +50,13 @@ export default function ProjetoEnsinoPage() {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setLoading(true)
     try {
-      console.log('Projeto de Ensino:', form)
+      await createProjetoEnsino({
+        ...form,
+        ano: Number(form.ano),
+        numeroBolsistas: form.numeroBolsistas ? Number(form.numeroBolsistas) : null,
+      })
       setSuccess(true)
+      carregarItens()
     } catch {
       setErrors({ submit: 'Não foi possível salvar. Tente novamente.' })
     } finally {
@@ -88,9 +101,24 @@ export default function ProjetoEnsinoPage() {
           <div className="projeto-ensino-info-card">
             <h3>Navegação</h3>
             <Link to="/feed">← Voltar ao Feed</Link>
-            <Link to="/apresentacao-trabalho-palestra">Apresentação de Trabalho</Link>
+            <Link to="/apresentacao">Apresentação de Trabalho</Link>
             <Link to="/produto">Produto</Link>
             <Link to="/trabalhos-tecnicos">Trabalhos Técnicos</Link>
+          </div>
+          <div className="projeto-ensino-info-card">
+            <h3>Meus projetos de ensino</h3>
+            {itens.length === 0 ? (
+              <p>Nenhum projeto cadastrado ainda.</p>
+            ) : (
+              <ul className="projeto-ensino-lista">
+                {itens.map(item => (
+                  <li key={item.id}>
+                    <strong>{item.titulo}</strong>
+                    <span>{item.ano} · {item.situacaoProjeto}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </aside>
 

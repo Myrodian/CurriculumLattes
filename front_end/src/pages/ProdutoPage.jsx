@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { createProduto, getMeusProdutos } from '../api/api'
 import './ProdutoPage.css'
 
 const TIPO_PRODUTO_OPTIONS = [
@@ -26,6 +27,13 @@ export default function ProdutoPage() {
   const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [itens, setItens] = useState([])
+
+  const carregarItens = () => {
+    getMeusProdutos().then(setItens).catch(() => {})
+  }
+
+  useEffect(() => { carregarItens() }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -51,9 +59,9 @@ export default function ProdutoPage() {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setLoading(true)
     try {
-      // await createProduto(form)
-      console.log('Produto:', form)
+      await createProduto({ ...form, ano: Number(form.ano) })
       setSuccess(true)
+      carregarItens()
     } catch {
       setErrors({ submit: 'Não foi possível salvar. Tente novamente.' })
     } finally {
@@ -98,9 +106,24 @@ export default function ProdutoPage() {
           <div className="produto-info-card">
             <h3>Navegação</h3>
             <Link to="/feed">← Voltar ao Feed</Link>
-            <Link to="/apresentacao-trabalho-palestra">Apresentação de Trabalho</Link>
+            <Link to="/apresentacao">Apresentação de Trabalho</Link>
             <Link to="/projeto-ensino">Projeto de Ensino</Link>
             <Link to="/trabalhos-tecnicos">Trabalhos Técnicos</Link>
+          </div>
+          <div className="produto-info-card">
+            <h3>Meus produtos</h3>
+            {itens.length === 0 ? (
+              <p>Nenhum produto cadastrado ainda.</p>
+            ) : (
+              <ul className="produto-lista">
+                {itens.map(item => (
+                  <li key={item.id}>
+                    <strong>{item.titulo}</strong>
+                    <span>{item.ano} · {item.tipoProduto}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </aside>
 

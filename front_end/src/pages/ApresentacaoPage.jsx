@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { createApresentacao, getMinhasApresentacoes } from '../api/api'
 import './ApresentacaoPage.css'
 
 const TIPO_EVENTO_OPTIONS = [
@@ -26,7 +27,14 @@ export default function ApresentacaoPage() {
   const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [itens, setItens] = useState([])
   const navigate = useNavigate()
+
+  const carregarItens = () => {
+    getMinhasApresentacoes().then(setItens).catch(() => {})
+  }
+
+  useEffect(() => { carregarItens() }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -53,9 +61,9 @@ export default function ApresentacaoPage() {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setLoading(true)
     try {
-      // await createApresentacao(form)
-      console.log('Apresentação de :', form)
+      await createApresentacao({ ...form, ano: Number(form.ano) })
       setSuccess(true)
+      carregarItens()
     } catch {
       setErrors({ submit: 'Não foi possível salvar. Tente novamente.' })
     } finally {
@@ -104,7 +112,22 @@ export default function ApresentacaoPage() {
             <Link to="/feed">← Voltar ao Feed</Link>
             <Link to="/produto">Produto</Link>
             <Link to="/projeto-ensino">Projeto de Ensino</Link>
-            <Link to="/s-tecnicos">s Técnicos</Link>
+            <Link to="/trabalhos-tecnicos">Trabalhos Técnicos</Link>
+          </div>
+          <div className="apresentacao-info-card">
+            <h3>Minhas apresentações</h3>
+            {itens.length === 0 ? (
+              <p>Nenhuma apresentação cadastrada ainda.</p>
+            ) : (
+              <ul className="apresentacao-lista">
+                {itens.map(item => (
+                  <li key={item.id}>
+                    <strong>{item.titulo}</strong>
+                    <span>{item.ano} · {item.nomeEvento}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </aside>
 

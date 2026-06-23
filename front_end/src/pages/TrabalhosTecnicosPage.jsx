@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { createTrabalhoTecnico, getMeusTrabalhosTecnicos } from '../api/api'
 import './TrabalhosTecnicosPage.css'
 
 const TIPO_TRABALHO_OPTIONS = [
@@ -26,6 +27,13 @@ export default function TrabalhosTecnicosPage() {
   const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [itens, setItens] = useState([])
+
+  const carregarItens = () => {
+    getMeusTrabalhosTecnicos().then(setItens).catch(() => {})
+  }
+
+  useEffect(() => { carregarItens() }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -51,8 +59,9 @@ export default function TrabalhosTecnicosPage() {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setLoading(true)
     try {
-      console.log('Trabalho Técnico:', form)
+      await createTrabalhoTecnico({ ...form, ano: Number(form.ano) })
       setSuccess(true)
+      carregarItens()
     } catch {
       setErrors({ submit: 'Não foi possível salvar. Tente novamente.' })
     } finally {
@@ -97,9 +106,24 @@ export default function TrabalhosTecnicosPage() {
           <div className="trabalhos-tecnicos-info-card">
             <h3>Navegação</h3>
             <Link to="/feed">← Voltar ao Feed</Link>
-            <Link to="/apresentacao-trabalho-palestra">Apresentação de Trabalho</Link>
+            <Link to="/apresentacao">Apresentação de Trabalho</Link>
             <Link to="/produto">Produto</Link>
             <Link to="/projeto-ensino">Projeto de Ensino</Link>
+          </div>
+          <div className="trabalhos-tecnicos-info-card">
+            <h3>Meus trabalhos técnicos</h3>
+            {itens.length === 0 ? (
+              <p>Nenhum trabalho técnico cadastrado ainda.</p>
+            ) : (
+              <ul className="trabalhos-tecnicos-lista">
+                {itens.map(item => (
+                  <li key={item.id}>
+                    <strong>{item.titulo}</strong>
+                    <span>{item.ano} · {item.tipoTrabalho}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </aside>
 
