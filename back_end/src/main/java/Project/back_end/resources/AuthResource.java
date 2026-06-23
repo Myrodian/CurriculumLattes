@@ -13,7 +13,7 @@ public class AuthResource {
     @PostMapping("/login")
     public ResponseEntity<AuthDTO.LoginResponse> login(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        return ResponseEntity.ok(new AuthDTO.LoginResponse(user.getEmail(), user.getName()));
+        return ResponseEntity.ok(new AuthDTO.LoginResponse(user.getId(), user.getEmail(), user.getName()));
     }
 
     @GetMapping("/health")

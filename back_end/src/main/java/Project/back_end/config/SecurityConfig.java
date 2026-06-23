@@ -46,6 +46,10 @@ public class SecurityConfig {
                         .requestMatchers("/auth/health").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        // busca e visualização de currículos são públicas (não exigem login)
+                        .requestMatchers(HttpMethod.GET, "/users/search").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/users/{id:[0-9]+}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/feed/users/{id:[0-9]+}").permitAll()
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()));

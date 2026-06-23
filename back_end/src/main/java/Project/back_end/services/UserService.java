@@ -3,6 +3,7 @@ package Project.back_end.services;
 import Project.back_end.dto.PerfilDTO;
 import Project.back_end.dto.UserDTO;
 import Project.back_end.dto.UserInsertDTO;
+import Project.back_end.dto.UserSummaryDTO;
 import Project.back_end.entities.Perfil;
 import Project.back_end.entities.User;
 import Project.back_end.repositories.PerfilRepository;
@@ -17,11 +18,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -105,6 +110,87 @@ public class UserService implements UserDetailsService {
 
         userRepository.save(user);
         return new UserDTO(user);
+    }
+
+    // ===== Seguir / busca de currículos =====
+
+    @Transactional
+    public void follow(Long targetId) {
+        User me = getAuthenticatedUser();
+        if (me.getId().equals(targetId)) {
+            return; // não é possível seguir a si mesmo
+        }
+        User target = userRepository.findById(targetId)
+                .orElseThrow(() -> new ResourceNotFound("Usuário não encontrado"));
+        me.getFollowing().add(target);
+        userRepository.save(me);
+    }
+
+    @Transactional
+    public void unfollow(Long targetId) {
+        User me = getAuthenticatedUser();
+        User target = userRepository.findById(targetId)
+                .orElseThrow(() -> new ResourceNotFound("Usuário não encontrado"));
+        me.getFollowing().remove(target);
+        userRepository.save(me);
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserSummaryDTO> getFollowing() {
+        User me = getAuthenticatedUser();
+        return me.getFollowing().stream()
+                .map(u -> new UserSummaryDTO(u, true))
+                .sorted(Comparator.comparing(UserSummaryDTO::getName,
+                        Comparator.nullsLast(String::compareToIgnoreCase)))
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserSummaryDTO> search(String q) {
+        String term = (q == null) ? "" : q.trim();
+        Set<Long> followingIds = followingIdsOfCurrentUser();
+        return userRepository.findByNameContainingIgnoreCase(term).stream()
+                .map(u -> new UserSummaryDTO(u, followingIds.contains(u.getId())))
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserSummaryDTO> suggestions() {
+        User me = getAuthenticatedUser();
+        Set<Long> exclude = new HashSet<>();
+        exclude.add(me.getId());
+        me.getFollowing().forEach(u -> exclude.add(u.getId()));
+        return userRepository.findAll().stream()
+                .filter(u -> !exclude.contains(u.getId()))
+                .limit(5)
+                .map(u -> new UserSummaryDTO(u, false))
+                .toList();
+    }
+
+    private Set<Long> followingIdsOfCurrentUser() {
+        User me = getAuthenticatedUserOrNull();
+        Set<Long> ids = new HashSet<>();
+        if (me != null && me.getFollowing() != null) {
+            me.getFollowing().forEach(u -> ids.add(u.getId()));
+        }
+        return ids;
+    }
+
+    private User getAuthenticatedUser() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByEmail(email);
+    }
+
+    private User getAuthenticatedUserOrNull() {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated()) {
+            return null;
+        }
+        Object principal = auth.getPrincipal();
+        if (principal == null || "anonymousUser".equals(principal)) {
+            return null;
+        }
+        return userRepository.findByEmail(auth.getName());
     }
 
     @Override

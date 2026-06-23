@@ -24,3 +24,15 @@ ON CONFLICT DO NOTHING;
 INSERT INTO tb_user_perfil (id_user, id_perfil) VALUES (1, 1) ON CONFLICT DO NOTHING;
 INSERT INTO tb_user_perfil (id_user, id_perfil) VALUES (2, 2) ON CONFLICT DO NOTHING;
 INSERT INTO tb_user_perfil (id_user, id_perfil) VALUES (2, 3) ON CONFLICT DO NOTHING;
+
+-- Relações de "seguir": Glauberson (1) segue Claudio (2)
+INSERT INTO tb_user_following (follower_id, followed_id) VALUES (1, 2) ON CONFLICT DO NOTHING;
+
+-- Produções de exemplo do Claudio (2) para popular o feed de quem o segue
+INSERT INTO tb_apresentacao (titulo, ano, autores, descricao, tipo_evento, nome_evento, local_evento, natureza, id_user, created_at)
+SELECT 'Aprendizado de Máquina em Edge Computing', 2024, 'Claudio Silva', 'Apresentação sobre inferência de modelos em dispositivos de borda.', 'congresso', 'SBRC 2024', 'Niterói, RJ', 'oral', 2, now()
+WHERE NOT EXISTS (SELECT 1 FROM tb_apresentacao WHERE titulo = 'Aprendizado de Máquina em Edge Computing');
+
+INSERT INTO tb_produto (titulo, ano, autores, descricao, tipo_produto, numero_registro, instituicao_financiadora, situacao, id_user, created_at)
+SELECT 'Biblioteca OpenLattes', 2023, 'Claudio Silva', 'Software de código aberto para integração com a Plataforma Lattes.', 'software', 'BR512023000123', 'CNPq', 'finalizado', 2, now()
+WHERE NOT EXISTS (SELECT 1 FROM tb_produto WHERE titulo = 'Biblioteca OpenLattes');

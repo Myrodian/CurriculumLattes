@@ -46,6 +46,14 @@ public class User implements UserDetails {
     )
     private Set<Perfil> perfils = new HashSet<Perfil>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "tb_user_following",
+            joinColumns = @JoinColumn(name = "follower_id"),
+            inverseJoinColumns = @JoinColumn(name = "followed_id")
+    )
+    private Set<User> following = new HashSet<User>();
+
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant created_at;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
@@ -135,6 +143,14 @@ public class User implements UserDetails {
 
     public void setPerfils(Set<Perfil> perfils) {
         this.perfils = perfils;
+    }
+
+    public Set<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<User> following) {
+        this.following = following;
     }
 
     public Instant getUpdated_at() { return updated_at; }
