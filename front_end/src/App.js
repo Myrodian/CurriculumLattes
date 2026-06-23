@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage';
 import CadastroPage from './pages/CadastroPage';
 import ProfilePage from './pages/ProfilePage';
 import FeedPage from './pages/FeedPage';
+import SearchPage from './pages/SearchPage';
 import ApresentacaoTrabalhoPage from './pages/ApresentacaoPage';
 import ProdutoPage from './pages/ProdutoPage';
 import ProjetoEnsinoPage from './pages/ProjetoEnsinoPage';
@@ -15,6 +16,10 @@ function App() {
             {/* Rotas públicas */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/cadastro" element={<CadastroPage />} />
+
+            {/* Rotas públicas — busca e visualização de currículos (não exigem login) */}
+            <Route path="/busca" element={<SearchPage />} />
+            <Route path="/perfil/:id" element={<ProfilePage />} />
 
             {/* Rotas protegidas — existentes */}
             <Route path="/perfil" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />

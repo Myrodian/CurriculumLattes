@@ -20,7 +20,7 @@ export default function LoginPage() {
     try {
       const data = await loginUser(email, password)
       login(data.token, data)
-      navigate('/dashboard')
+      navigate('/feed')
     } catch (err) {
       setError(
         err.response?.status === 401
