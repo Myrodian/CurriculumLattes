@@ -166,7 +166,7 @@ export default function ProfilePage() {
                 {isFollowing ? <><IconCheck /> Seguindo</> : <><IconPlus /> Seguir</>}
               </button>
             )}
-            {isOwn && (
+            {/* {isOwn && (
               <Link
                 to="/apresentacao"
                 className="profile-btn-edit-profile"
@@ -174,7 +174,7 @@ export default function ProfilePage() {
               >
                 <IconPlus /> Nova produção
               </Link>
-            )}
+            )} */}
 
             <ul className="profile-meta-list">
               {email && (
