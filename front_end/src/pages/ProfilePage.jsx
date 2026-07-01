@@ -84,14 +84,27 @@ export default function ProfilePage() {
     <div className="profile-root">
 
       {/* ── Header ── */}
-      <Header to={isAuthenticated ? '/feed' : '/login'}>
-        {isAuthenticated && <Link to="/feed">Feed</Link>}
-        <Link to="/busca">Buscar</Link>
-        <a href="#ajuda">Ajuda</a>
-      </Header>
+      <header className="profile-header">
+        <Link to={isAuthenticated ? '/feed' : '/login'} className="profile-header-logo" style={{ textDecoration: 'none' }}>
+          <div className="profile-header-icon"><IconLattes /></div>
+          <div className="profile-header-brand">
+            <span>Plataforma</span>
+            <span>Lattes</span>
+          </div>
+        </Link>
+        <nav className="profile-header-links">
+          {isAuthenticated && <Link to="/feed">Feed</Link>}
+          <Link to="/busca">Buscar</Link>
+          <a href="#ajuda">Ajuda</a>
+        </nav>
+      </header>
 
       {/* ── Breadcrumb ── */}
-      <Breadcrumb items={['Início', 'Currículo', user?.name]} />
+      <div className="profile-subheader">
+        <span>Início</span>
+        <span>Currículo</span>
+        {user?.name && <span>{user.name}</span>}
+      </div>
 
       {/* ── Main ── */}
       <main className="profile-main">
@@ -107,12 +120,22 @@ export default function ProfilePage() {
             {username && <span className="profile-user-username">@{username}</span>}
 
             {isAuthenticated && !isOwn && (
-              <FollowButton
-                following={isFollowing}
-                onClick={toggleFollow}
+              <button
                 className={isFollowing ? 'profile-btn-secondary' : 'profile-btn-primary'}
+                onClick={toggleFollow}
                 style={{ marginTop: '0.85rem', width: '100%', justifyContent: 'center', cursor: 'pointer' }}
-              />
+              >
+                {isFollowing ? <><IconCheck /> Seguindo</> : <><IconPlus /> Seguir</>}
+              </button>
+            )}
+            {isOwn && (
+              <Link
+                to="/apresentacao"
+                className="profile-btn-edit-profile"
+                style={{ marginTop: '0.85rem' }}
+              >
+                <IconPlus /> Nova produção
+              </Link>
             )}
 
             <ul className="profile-meta-list">
@@ -249,7 +272,7 @@ export default function ProfilePage() {
               <div className="profile-section-title-bar">
                 <IconArticle />
                 <span>Produções Acadêmicas</span>
-                <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
+                <Link to="/producoes" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
               </div>
               <div className="profile-section-body">
                 {producoes.length === 0 ? (
@@ -317,7 +340,14 @@ export default function ProfilePage() {
       </main>
 
       {/* ── Footer ── */}
-      <Footer />
+      <footer className="profile-footer">
+        <p>
+          Plataforma Lattes — Conselho Nacional de Desenvolvimento Científico e
+          Tecnológico (CNPq) ·{' '}
+          <a href="#privacidade">Política de Privacidade</a> ·{' '}
+          <a href="#termos">Termos de Uso</a>
+        </p>
+      </footer>
 
     </div>
   )
