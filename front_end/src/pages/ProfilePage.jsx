@@ -3,7 +3,7 @@ import { Link, useParams, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getUserById, getUserActivities, getFollowing, followUser, unfollowUser } from '../api/api'
 import './ProfilePage.css'
-import { IconDoc, IconUser, IconEmail, IconId, IconBuilding, IconArticle, IconGrad, IconWork, IconPlus, IconLattes, IconOverview } from '../components/Icons'
+import { IconDoc, IconUser, IconEmail, IconId, IconBuilding, IconArticle, IconGrad, IconWork, IconPlus, IconLattes, IconOverview, IconTool, IconBook } from '../components/Icons'
 import Header from '../components/layout/Header'
 import Breadcrumb from '../components/layout/Breadcrumb'
 import Footer from '../components/layout/Footer'
@@ -254,11 +254,16 @@ export default function ProfilePage() {
 
           {/* ── Produções ── */}
           {activeTab === 'producoes' && (
-            <div className="profile-section-card">
+            <div className="profile-section-card" >
               <div className="profile-section-title-bar">
                 <IconArticle />
                 <span>Produções Acadêmicas</span>
-                <Link to="/producoes" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
+              </div>
+              <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '25px', alignItems: 'center', marginLeft: '50px', marginRight: '50px' }}>
+                <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
+                <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
+                <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
+                <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
               </div>
               <div className="profile-section-body">
                 {producoes.length === 0 ? (
@@ -291,6 +296,12 @@ export default function ProfilePage() {
                 <IconGrad />
                 <span>Formação Acadêmica</span>
               </div>
+                <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '25px', alignItems: 'center', marginLeft: '50px', marginRight: '50px' }}>
+                  <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
+                  <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
+                  <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
+                  <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
+                </div>
               <div className="profile-section-body">
                 <div className="profile-empty-state">
                   <IconGrad />
@@ -306,7 +317,13 @@ export default function ProfilePage() {
               <div className="profile-section-title-bar">
                 <IconWork />
                 <span>Projetos de Pesquisa</span>
-              </div>
+                </div>
+                <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '25px', alignItems: 'center', marginLeft: '50px', marginRight: '50px' }}>
+                  <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
+                  <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
+                  <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
+                  <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
+                </div>
               <div className="profile-section-body">
                 <div className="profile-empty-state">
                   <IconWork />

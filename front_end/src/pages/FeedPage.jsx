@@ -188,10 +188,10 @@ export default function FeedPage() {
               Olá, {user?.name ? user.name.split(' ')[0] : 'pesquisador'} 👋
             </div>
             <div className="feed-action-shortcuts">
-              <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
-              <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
-              <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
-              <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
+              <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação </Link>
+              <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto </Link>
+              <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino </Link>
+              <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico </Link>
             </div>
           </div>
 

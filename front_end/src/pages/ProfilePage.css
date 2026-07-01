@@ -329,6 +329,14 @@ body {
   gap: 8px;
 }
 
+.profile-subsection-title-bar {
+  background: var(--blue-500);
+  padding: 10px 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .profile-section-title-bar svg { width: 16px; height: 16px; fill: var(--blue-200); flex-shrink: 0; }
 
 .profile-section-title-bar span {
