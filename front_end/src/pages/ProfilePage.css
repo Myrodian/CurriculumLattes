@@ -241,7 +241,16 @@ body {
   color: var(--gray-700);
 }
 
-.profile-meta-item svg { width: 15px; height: 15px; fill: var(--gray-500); flex-shrink: 0; }
+.profile-meta-item svg { width: 10px; height: 10px; fill: var(--gray-500); flex-shrink: 0; }
+
+.profile-btn-primary svg,
+.profile-btn-secondary svg,
+.profile-btn-edit-profile svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
 
 .profile-meta-item a {
   color: var(--blue-700);
