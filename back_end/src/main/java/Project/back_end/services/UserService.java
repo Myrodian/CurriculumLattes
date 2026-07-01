@@ -206,6 +206,7 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         User user = new User();
+        user.setId(dbData.getFirst().getId());
         user.setPassword(dbData.getFirst().getPassword());
         user.setEmail(dbData.getFirst().getUsername());
         user.setName(dbData.getFirst().getName());

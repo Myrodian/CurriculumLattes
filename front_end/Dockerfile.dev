@@ -1,0 +1,15 @@
+# Imagem de desenvolvimento: roda o dev server do Create React App (npm start),
+# que tem Fast Refresh/HMR. As mudanças em src/ são sincronizadas pelo `docker compose watch`.
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY public ./public
+COPY src ./src
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

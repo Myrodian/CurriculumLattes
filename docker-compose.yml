@@ -22,7 +22,7 @@ services:
   backend:
     build:
       context: ./back_end
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: curriculumlattes-backend
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/lattes
@@ -40,25 +40,55 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      # Cache do repositório Maven entre restarts (dependências não são baixadas de novo).
+      - maven_repo:/root/.m2
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/auth/health"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/auth/health"]
       interval: 15s
       timeout: 5s
       retries: 5
-      start_period: 60s
+      start_period: 120s
     restart: unless-stopped
+    develop:
+      watch:
+        # Ao salvar qualquer arquivo em src/, sincroniza no container e reinicia o app
+        # (Maven recompila de forma incremental usando o target já em cache).
+        - action: sync+restart
+          path: ./back_end/src
+          target: /app/src
+        # Mudou dependência no pom.xml? Reconstrói a imagem.
+        - action: rebuild
+          path: ./back_end/pom.xml
 
   frontend:
     build:
       context: ./front_end
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: curriculumlattes-frontend
     ports:
-      - "3000:80"
+      - "3000:3000"
+    environment:
+      # Polling é necessário para o watcher enxergar mudanças em bind mounts no Windows.
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
     depends_on:
       backend:
         condition: service_healthy
     restart: unless-stopped
+    develop:
+      watch:
+        # HMR: sincroniza src/ e public/ no container; o dev server aplica no navegador
+        # sem recarregar a página.
+        - action: sync
+          path: ./front_end/src
+          target: /app/src
+        - action: sync
+          path: ./front_end/public
+          target: /app/public
+        # Mudou dependência? Reconstrói a imagem.
+        - action: rebuild
+          path: ./front_end/package.json
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -76,3 +106,5 @@ services:
 volumes:
   postgres_data:
     name: curriculumlattes_postgres_data
+  maven_repo:
+    name: curriculumlattes_maven_repo

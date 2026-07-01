@@ -18,7 +18,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             nativeQuery = true,
             value = """
                     
-                    SELECT u.email as username,
+                    SELECT u.id as id,
+                           u.email as username,
                            u.password as password,
                            u.name as name,
                            p.id as roleId,
