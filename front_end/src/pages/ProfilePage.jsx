@@ -3,53 +3,7 @@ import { Link, useParams, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getUserById, getUserActivities, getFollowing, followUser, unfollowUser } from '../api/api'
 import './ProfilePage.css'
-
-/* ── Ícones reutilizáveis ── */
-const IconUser = () => (
-  <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4
-    7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-)
-const IconEmail = () => (
-  <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2
-    2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-)
-const IconId = () => (
-  <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2
-    2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM8 13H6v-2h2v2zm0-4H6V7h2v2zm10
-    4H10v-2h8v2zm0-4h-8V7h8v2z"/></svg>
-)
-const IconBuilding = () => (
-  <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4
-    12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0
-    4h-2v2h2v-2z"/></svg>
-)
-const IconArticle = () => (
-  <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9
-    2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-)
-const IconGrad = () => (
-  <svg viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12
-    3zm-5 8.18V15c0 1.66 3 3 5 3s5-1.34 5-3v-3.82l-5 2.73-5-2.73z"/></svg>
-)
-const IconWork = () => (
-  <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1
-    0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9
-    2-2V8c0-1.1-.9-2-2-2zm-6 0h-4V4h4v2z"/></svg>
-)
-const IconPlus = () => (
-  <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-)
-const IconCheck = () => (
-  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-)
-const IconLattes = () => (
-  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
-    10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-)
-const IconOverview = () => (
-  <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4
-    4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-)
+import { IconDoc, IconUser, IconEmail, IconId, IconBuilding, IconArticle, IconGrad, IconWork, IconPlus, IconCheck, IconLattes, IconOverview } from '../components/Icons'
 
 const TIPO_LABEL = {
   APRESENTACAO: 'Apresentação de trabalho',
@@ -65,6 +19,8 @@ export default function ProfilePage() {
 
   const [user, setUser]           = useState(null)
   const [producoes, setProducoes] = useState([])
+  const [formacao, setFormacao]   = useState([])
+  const [projetos, setProjetos]   = useState([])
   const [isFollowing, setFollowing] = useState(false)
   const [activeTab, setActiveTab] = useState('overview')
   const [loading, setLoading]     = useState(true)
@@ -82,6 +38,8 @@ export default function ProfilePage() {
         if (!u) setError('Não foi possível carregar o currículo.')
         setUser(u)
         setProducoes(acts || [])
+        setFormacao(u?.formacao || [])
+        setProjetos(u?.projetos || [])
       })
       .finally(() => setLoading(false))
   }, [targetId])
@@ -114,8 +72,8 @@ export default function ProfilePage() {
   const TABS = [
     { id: 'overview',  label: 'Visão Geral', icon: <IconOverview />, badge: null },
     { id: 'producoes', label: 'Produções',   icon: <IconArticle />,  badge: producoes.length },
-    { id: 'formacao',  label: 'Formação',     icon: <IconGrad />,     badge: 0 },
-    { id: 'projetos',  label: 'Projetos',     icon: <IconWork />,     badge: 0 },
+    { id: 'formacao',  label: 'Formação',     icon: <IconGrad />,     badge: formacao.length },
+    { id: 'projetos',  label: 'Projetos',     icon: <IconWork />,     badge: projetos.length },
   ]
 
   return (
@@ -278,11 +236,6 @@ export default function ProfilePage() {
                 <div className="profile-section-title-bar">
                   <IconArticle />
                   <span>Últimas Produções</span>
-                  <div className="profile-section-actions">
-                    <button className="profile-btn-action" onClick={() => setActiveTab('producoes')}>
-                      Ver todas
-                    </button>
-                  </div>
                 </div>
                 <div className="profile-section-body">
                   {producoes.length === 0 ? (
@@ -315,6 +268,7 @@ export default function ProfilePage() {
               <div className="profile-section-title-bar">
                 <IconArticle />
                 <span>Produções Acadêmicas</span>
+                <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
               </div>
               <div className="profile-section-body">
                 {producoes.length === 0 ? (
