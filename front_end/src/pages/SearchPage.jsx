@@ -4,7 +4,11 @@ import { useAuth } from '../context/AuthContext'
 import { searchUsers, followUser, unfollowUser } from '../api/api'
 import './FeedPage.css'
 import './SearchPage.css'
-import { IconLattes, IconSearch, IconUser, IconPlus, IconCheck } from '../components/Icons'
+import { IconSearch, IconUser } from '../components/Icons'
+import Header from '../components/layout/Header'
+import Breadcrumb from '../components/layout/Breadcrumb'
+import Footer from '../components/layout/Footer'
+import FollowButton from '../components/ui/FollowButton'
 
 export default function SearchPage() {
   const [params, setParams] = useSearchParams()
@@ -43,33 +47,20 @@ export default function SearchPage() {
     <div className="feed-root">
 
       {/* ── Header ── */}
-      <header className="feed-header">
-        <Link to={isAuthenticated ? '/feed' : '/login'} className="feed-header-logo" style={{ textDecoration: 'none' }}>
-          <div className="feed-header-icon"><IconLattes /></div>
-          <div className="feed-header-brand">
-            <span>Plataforma</span>
-            <span>Lattes</span>
-          </div>
-        </Link>
+      <Header to={isAuthenticated ? '/feed' : '/login'}>
+        {isAuthenticated ? (
+          <>
+            <Link to="/feed">Feed</Link>
+            <Link to={user?.id ? `/perfil/${user.id}` : '/feed'} className="app-header-avatar" title="Meu perfil">
+              <IconUser />
+            </Link>
+          </>
+        ) : (
+          <Link to="/login">Entrar</Link>
+        )}
+      </Header>
 
-        <nav className="feed-header-nav">
-          {isAuthenticated ? (
-            <>
-              <Link to="/feed">Feed</Link>
-              <Link to={user?.id ? `/perfil/${user.id}` : '/feed'} className="feed-header-avatar" title="Meu perfil">
-                <IconUser />
-              </Link>
-            </>
-          ) : (
-            <Link to="/login">Entrar</Link>
-          )}
-        </nav>
-      </header>
-
-      <div className="feed-subheader">
-        <span>Início</span>
-        <span>Buscar currículos</span>
-      </div>
+      <Breadcrumb items={['Início', 'Buscar currículos']} />
 
       {/* ── Conteúdo ── */}
       <main className="search-main">
@@ -108,12 +99,11 @@ export default function SearchPage() {
                   <div className="search-result-inst">{u.institutionName || 'Pesquisador(a)'}</div>
                 </div>
                 {isAuthenticated && user?.id !== u.id && (
-                  <button
-                    className={`search-follow-btn${u.following ? ' following' : ''}`}
+                  <FollowButton
+                    following={u.following}
                     onClick={() => toggleFollow(u)}
-                  >
-                    {u.following ? <><IconCheck /> Seguindo</> : <><IconPlus /> Seguir</>}
-                  </button>
+                    className={`search-follow-btn${u.following ? ' following' : ''}`}
+                  />
                 )}
               </div>
             ))}
@@ -121,14 +111,7 @@ export default function SearchPage() {
         )}
       </main>
 
-      <footer className="feed-footer">
-        <p>
-          Plataforma Lattes — Conselho Nacional de Desenvolvimento Científico e
-          Tecnológico (CNPq) ·{' '}
-          <a href="#privacidade">Política de Privacidade</a> ·{' '}
-          <a href="#termos">Termos de Uso</a>
-        </p>
-      </footer>
+      <Footer />
 
     </div>
   )

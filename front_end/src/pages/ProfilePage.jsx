@@ -3,7 +3,11 @@ import { Link, useParams, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getUserById, getUserActivities, getFollowing, followUser, unfollowUser } from '../api/api'
 import './ProfilePage.css'
-import { IconDoc, IconUser, IconEmail, IconId, IconBuilding, IconArticle, IconGrad, IconWork, IconPlus, IconCheck, IconLattes, IconOverview } from '../components/Icons'
+import { IconDoc, IconUser, IconEmail, IconId, IconBuilding, IconArticle, IconGrad, IconWork, IconLattes, IconOverview } from '../components/Icons'
+import Header from '../components/layout/Header'
+import Breadcrumb from '../components/layout/Breadcrumb'
+import Footer from '../components/layout/Footer'
+import FollowButton from '../components/ui/FollowButton'
 
 const TIPO_LABEL = {
   APRESENTACAO: 'Apresentação de trabalho',
@@ -80,27 +84,14 @@ export default function ProfilePage() {
     <div className="profile-root">
 
       {/* ── Header ── */}
-      <header className="profile-header">
-        <Link to={isAuthenticated ? '/feed' : '/login'} className="profile-header-logo" style={{ textDecoration: 'none' }}>
-          <div className="profile-header-icon"><IconLattes /></div>
-          <div className="profile-header-brand">
-            <span>Plataforma</span>
-            <span>Lattes</span>
-          </div>
-        </Link>
-        <nav className="profile-header-links">
-          {isAuthenticated && <Link to="/feed">Feed</Link>}
-          <Link to="/busca">Buscar</Link>
-          <a href="#ajuda">Ajuda</a>
-        </nav>
-      </header>
+      <Header to={isAuthenticated ? '/feed' : '/login'}>
+        {isAuthenticated && <Link to="/feed">Feed</Link>}
+        <Link to="/busca">Buscar</Link>
+        <a href="#ajuda">Ajuda</a>
+      </Header>
 
       {/* ── Breadcrumb ── */}
-      <div className="profile-subheader">
-        <span>Início</span>
-        <span>Currículo</span>
-        {user?.name && <span>{user.name}</span>}
-      </div>
+      <Breadcrumb items={['Início', 'Currículo', user?.name]} />
 
       {/* ── Main ── */}
       <main className="profile-main">
@@ -116,23 +107,13 @@ export default function ProfilePage() {
             {username && <span className="profile-user-username">@{username}</span>}
 
             {isAuthenticated && !isOwn && (
-              <button
-                className={isFollowing ? 'profile-btn-secondary' : 'profile-btn-primary'}
+              <FollowButton
+                following={isFollowing}
                 onClick={toggleFollow}
+                className={isFollowing ? 'profile-btn-secondary' : 'profile-btn-primary'}
                 style={{ marginTop: '0.85rem', width: '100%', justifyContent: 'center', cursor: 'pointer' }}
-              >
-                {isFollowing ? <><IconCheck /> Seguindo</> : <><IconPlus /> Seguir</>}
-              </button>
+              />
             )}
-            {/* {isOwn && (
-              <Link
-                to="/apresentacao"
-                className="profile-btn-edit-profile"
-                style={{ marginTop: '0.85rem' }}
-              >
-                <IconPlus /> Nova produção
-              </Link>
-            )} */}
 
             <ul className="profile-meta-list">
               {email && (
@@ -336,14 +317,7 @@ export default function ProfilePage() {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="profile-footer">
-        <p>
-          Plataforma Lattes — Conselho Nacional de Desenvolvimento Científico e
-          Tecnológico (CNPq) ·{' '}
-          <a href="#privacidade">Política de Privacidade</a> ·{' '}
-          <a href="#termos">Termos de Uso</a>
-        </p>
-      </footer>
+      <Footer />
 
     </div>
   )

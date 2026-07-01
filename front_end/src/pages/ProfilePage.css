@@ -35,61 +35,6 @@ body {
 /* ── Layout ── */
 .profile-root { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ── Header ── */
-.profile-header {
-  background: var(--blue-800);
-  border-bottom: 3px solid var(--blue-600);
-  padding: 0 2rem;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-shrink: 0;
-}
-
-.profile-header-logo { display: flex; align-items: center; gap: 10px; }
-
-.profile-header-icon {
-  width: 36px; height: 36px;
-  background: var(--white);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-}
-
-.profile-header-icon svg { width: 22px; height: 22px; fill: var(--blue-800); }
-
-.profile-header-brand { display: flex; flex-direction: column; line-height: 1.1; }
-
-.profile-header-brand span:first-child {
-  font-size: 10px; font-weight: 400; color: var(--blue-200);
-  letter-spacing: 0.08em; text-transform: uppercase;
-}
-
-.profile-header-brand span:last-child {
-  font-family: 'Source Serif 4', Georgia, serif;
-  font-size: 18px; font-weight: 600; color: var(--white); letter-spacing: -0.02em;
-}
-
-.profile-header-links { display: flex; gap: 1.5rem; }
-
-.profile-header-links a {
-  color: var(--blue-200); text-decoration: none;
-  font-size: 13px; font-weight: 400; transition: color 0.15s;
-}
-
-.profile-header-links a:hover { color: var(--white); }
-
-/* ── Subheader / Breadcrumb ── */
-.profile-subheader {
-  background: var(--blue-900); padding: 6px 2rem;
-  display: flex; align-items: center; gap: 6px;
-}
-
-.profile-subheader span { font-size: 12px; color: var(--blue-200); }
-
-.profile-subheader span:not(:last-child)::after {
-  content: '›'; margin-left: 6px; color: var(--blue-400);
-}
 
 /* ── Main ── */
 .profile-main {
@@ -604,17 +549,6 @@ body {
 
 .profile-btn-secondary:hover { background: var(--gray-300); }
 
-/* ── Footer ── */
-.profile-footer {
-  background: var(--blue-900);
-  border-top: 1px solid var(--blue-800);
-  padding: 12px 2rem;
-  text-align: center;
-}
-
-.profile-footer p { font-size: 11px; color: var(--blue-400); line-height: 1.6; }
-
-.profile-footer a { color: var(--blue-200); text-decoration: none; }
 
 /* ── Spinner ── */
 .profile-spinner {
@@ -658,7 +592,6 @@ body {
 
   .profile-meta-list, .profile-stats-row, .profile-btn-edit-profile { width: 100%; }
 
-  .profile-header-links { display: none; }
 
   .profile-cv-info-grid { grid-template-columns: 1fr; }
 

@@ -3,7 +3,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getFeed, getFollowing, getSuggestions, followUser } from '../api/api'
 import './FeedPage.css'
-import { IconLattes, IconSearch, IconUser, IconDoc, IconBook, IconTool, IconPlus, IconTrend } from '../components/Icons'
+import { IconSearch, IconUser, IconDoc, IconBook, IconTool, IconPlus, IconTrend } from '../components/Icons'
+import Header from '../components/layout/Header'
+import Breadcrumb from '../components/layout/Breadcrumb'
+import Footer from '../components/layout/Footer'
+import FollowButton from '../components/ui/FollowButton'
 
 /* ════════════════════════════
    METADADOS POR TIPO DE PRODUÇÃO
@@ -117,20 +121,13 @@ export default function FeedPage() {
     <div className="feed-root">
 
       {/* ── Header ── */}
-      <header className="feed-header">
-        <div className="feed-header-logo">
-          <div className="feed-header-icon"><IconLattes /></div>
-          <div className="feed-header-brand">
-            <span>Plataforma</span>
-            <span>Lattes</span>
-          </div>
-        </div>
-
-        <div className="feed-header-center">
-          <form className="feed-header-search-wrap" onSubmit={handleSearch}>
+      <Header
+        to="/feed"
+        center={
+          <form className="app-header-search-wrap" onSubmit={handleSearch}>
             <IconSearch />
             <input
-              className="feed-header-search"
+              className="app-header-search"
               type="search"
               placeholder="Buscar currículos, pesquisadores..."
               value={search}
@@ -138,22 +135,17 @@ export default function FeedPage() {
               aria-label="Buscar"
             />
           </form>
-        </div>
-
-        <nav className="feed-header-nav">
-          <Link to="/busca">Buscar</Link>
-          <a href="#ajuda">Ajuda</a>
-          <Link to={perfilLink} className="feed-header-avatar" title="Meu perfil" aria-label="Meu perfil">
-            <IconUser />
-          </Link>
-        </nav>
-      </header>
+        }
+      >
+        <Link to="/busca">Buscar</Link>
+        <a href="#ajuda">Ajuda</a>
+        <Link to={perfilLink} className="app-header-avatar" title="Meu perfil" aria-label="Meu perfil">
+          <IconUser />
+        </Link>
+      </Header>
 
       {/* ── Breadcrumb ── */}
-      <div className="feed-subheader">
-        <span>Início</span>
-        <span>Feed</span>
-      </div>
+      <Breadcrumb items={['Início', 'Feed']} />
 
       {/* ── Layout principal ── */}
       <main className="feed-main">
@@ -253,10 +245,7 @@ export default function FeedPage() {
                     <Link to={`/perfil/${s.id}`} className="feed-trending-name">{s.name}</Link>
                     <p className="feed-trending-desc">{s.institutionName || 'Pesquisador(a)'}</p>
                   </div>
-                  <button className="feed-trending-star-btn" onClick={() => handleFollow(s.id)}>
-                    <IconPlus />
-                    Seguir
-                  </button>
+                  <FollowButton className="feed-trending-star-btn" onClick={() => handleFollow(s.id)} />
                 </div>
               ))
             )}
@@ -287,14 +276,7 @@ export default function FeedPage() {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="feed-footer">
-        <p>
-          Plataforma Lattes — Conselho Nacional de Desenvolvimento Científico e
-          Tecnológico (CNPq) ·{' '}
-          <a href="#privacidade">Política de Privacidade</a> ·{' '}
-          <a href="#termos">Termos de Uso</a>
-        </p>
-      </footer>
+      <Footer />
 
     </div>
   )
