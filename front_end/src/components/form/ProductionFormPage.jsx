@@ -59,6 +59,7 @@ export default function ProductionFormPage({ config }) {
   const allFields = sections.flatMap(s => s.fields)
 
   const carregarItens = () => { api.list().then(setItens).catch(() => {}) }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { carregarItens() }, [])
 
   const handleChange = (e) => {
