@@ -74,6 +74,7 @@ public class UserService implements UserDetailsService {
         user.setEmail(dto.getEmail());
         user.setPhone(dto.getPhone());
         user.setCpf(dto.getCpf());
+        user.setAddress(dto.getAddress());
 
         user.getPerfils().clear();
         if (dto.getPerfils() != null) {
