@@ -71,7 +71,13 @@ export default function ProfilePage() {
   const email        = user?.email || ''
   const username     = email ? email.split('@')[0] : ''
   const institution  = user?.address?.institutionName || ''
-  const profileLabel = user?.perfils?.[0]?.nome || 'Pesquisador'
+  const ROLE_LABEL = {
+    ROLE_ADMINISTRADOR: 'Administrador',
+    ROLE_PESQUISADOR: 'Pesquisador',
+    ROLE_ESTUDANTE: 'Estudante',
+  }
+  const rawRole      = user?.perfils?.[0]?.nome
+  const profileLabel = ROLE_LABEL[rawRole] || rawRole || 'Pesquisador'
 
   const TABS = [
     { id: 'overview',  label: 'Visão Geral', icon: <IconOverview />, badge: null },
