@@ -265,12 +265,14 @@ export default function ProfilePage() {
                 <IconArticle />
                 <span>Produções Acadêmicas</span>
               </div>
-              <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '25px', alignItems: 'center', marginLeft: '50px', marginRight: '50px' }}>
-                <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
-                <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
-                <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
-                <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
-              </div>
+              {isOwn && (
+                <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '20px', alignItems: 'center', marginLeft: '25px', marginRight: '25px', lineHeight: '11px' }}>
+                  <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
+                  <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
+                  <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
+                  <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
+                </div>
+              )}
               <div className="profile-section-body">
                 {producoes.length === 0 ? (
                   <div className="profile-empty-state">
@@ -302,12 +304,14 @@ export default function ProfilePage() {
                 <IconGrad />
                 <span>Formação Acadêmica</span>
               </div>
-                <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '25px', alignItems: 'center', marginLeft: '50px', marginRight: '50px' }}>
+              {isOwn && (
+                <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '20px', alignItems: 'center', marginLeft: '25px', marginRight: '25px', lineHeight: '11px' }}>
                   <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
                   <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
                   <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
                   <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
                 </div>
+              )}
               <div className="profile-section-body">
                 <div className="profile-empty-state">
                   <IconGrad />
@@ -324,12 +328,14 @@ export default function ProfilePage() {
                 <IconWork />
                 <span>Projetos de Pesquisa</span>
                 </div>
-                <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '25px', alignItems: 'center', marginLeft: '50px', marginRight: '50px' }}>
-                  <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
-                  <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
-                  <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
-                  <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
-                </div>
+                {isOwn && (
+                  <div className="profile-subsection-title-bar" style={{ display: 'flex', gap: '20px', alignItems: 'center', marginLeft: '25px', marginRight: '25px', lineHeight: '11px' }}>
+                    <Link to="/apresentacao" className="feed-shortcut-btn"><IconDoc /> Nova apresentação</Link>
+                    <Link to="/produto" className="feed-shortcut-btn"><IconTool /> Novo produto</Link>
+                    <Link to="/projeto-ensino" className="feed-shortcut-btn"><IconBook /> Projeto de ensino</Link>
+                    <Link to="/trabalhos-tecnicos" className="feed-shortcut-btn"><IconTool /> Trabalho técnico</Link>
+                  </div>
+                )}
               <div className="profile-section-body">
                 <div className="profile-empty-state">
                   <IconWork />
